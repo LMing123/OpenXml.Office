@@ -19,10 +19,10 @@ namespace Word
         {
             fc = new FormatCollection();
         }
-        public void SetFontSize(string fontSize)
+        public void SetFontSize(int fontSize)
         {           
             fc.RunProperties = new RunProperties();
-            fc.RunProperties.FontSize = new FontSize() { Val = fontSize };
+            fc.RunProperties.FontSize = new FontSize() { Val = (fontSize*2).ToString() };
         }
     }
 }
