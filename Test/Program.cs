@@ -17,6 +17,7 @@ namespace Test
             fc.SetFontFormat(20,color: Color.Blue,italic:true);
             doc.AddParagraph("Hello World", fc.fc);
             fc.SetFontFormat(50,true,highlightColor: HighlightColor.Blue);
+            fc.SetParaFormat(2);
             doc.AddParagraph("this is a test para",fc.fc);
             doc.AddParagraph();
             doc.AddText("123");

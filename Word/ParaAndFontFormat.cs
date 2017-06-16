@@ -46,9 +46,11 @@ namespace Word
                 fc.RunProperties.Italic = new Italic() { Val = new DocumentFormat.OpenXml.OnOffValue(italic) };
             }
         }
-        public void SetParaFormat()
+        public void SetParaFormat(int firstLineChars,JustificationValues justificationValues)
         {
-
+            fc.ParagraphProperties = new ParagraphProperties();
+            fc.ParagraphProperties.Indentation = new Indentation() { FirstLineChars = firstLineChars*100 };
+            fc.ParagraphProperties.Justification = new Justification() { Val =(DocumentFormat.OpenXml.Wordprocessing.JustificationValues) justificationValues };
         }
     }
 }
