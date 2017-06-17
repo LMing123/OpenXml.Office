@@ -45,9 +45,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateAndAddParagraphStyle.cs" />
     <Compile Include="Docments.cs" />
-    <Compile Include="HighlightColor.cs" />
+    <Compile Include="Enum\HighlightColor.cs" />
+    <Compile Include="Enum\JustificationValues.cs" />
     <Compile Include="ParaAndFontFormat.cs" />
+    <Compile Include="Enum\ParagraphStyle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

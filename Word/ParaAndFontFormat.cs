@@ -31,7 +31,7 @@ namespace Word
             }
             if (color != null)
             {
-                 fc.RunProperties.Color = new Color() { Val = String.Format("{0:X6}", color.Value.R << 16 | color.Value.G << 8 | color.Value.B) };                
+                fc.RunProperties.Color = new Color() { Val = String.Format("{0:X6}", color.Value.R << 16 | color.Value.G << 8 | color.Value.B) };
             }
             if (shadow != null)
             {
@@ -39,18 +39,30 @@ namespace Word
             }
             if (highlightColor != null)
             {
-                fc.RunProperties.Highlight = new Highlight() { Val =(HighlightColorValues) highlightColor };
+                fc.RunProperties.Highlight = new Highlight() { Val = (HighlightColorValues)highlightColor };
             }
             if (italic != null)
             {
                 fc.RunProperties.Italic = new Italic() { Val = new DocumentFormat.OpenXml.OnOffValue(italic) };
             }
         }
-        public void SetParaFormat(int firstLineChars,JustificationValues justificationValues)
+        public void SetParaFormat(int? firstLineChars = null, JustificationValues? justificationValues = null, ParagraphStyle? paragraphStyle = null)
         {
             fc.ParagraphProperties = new ParagraphProperties();
-            fc.ParagraphProperties.Indentation = new Indentation() { FirstLineChars = firstLineChars*100 };
-            fc.ParagraphProperties.Justification = new Justification() { Val =(DocumentFormat.OpenXml.Wordprocessing.JustificationValues) justificationValues };
+            if (firstLineChars != null)
+            {
+                fc.ParagraphProperties.Indentation = new Indentation() { FirstLineChars = firstLineChars * 100 };//首行缩进
+            }
+            if (justificationValues != null)
+            {
+                fc.ParagraphProperties.Justification = new Justification() { Val = (DocumentFormat.OpenXml.Wordprocessing.JustificationValues)justificationValues };
+            }
+            if (paragraphStyle != null)
+            {
+                
+                fc.ParagraphProperties.ParagraphStyleId = new ParagraphStyleId() { Val = paragraphStyle.ToString() };
+                fc.ParagraphProperties.OutlineLevel = new OutlineLevel() { Val = (int)paragraphStyle.Value-1 };
+            }
         }
     }
 }
