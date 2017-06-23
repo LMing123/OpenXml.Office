@@ -68,16 +68,16 @@ namespace Word
 
         }
 
-        public void AddParagraph(string text, FormatCollection fc = null)
+        public void AddParagraph(string text, FormatCollection formatCollection = null)
         {
 
             Paragraph para = body.AppendChild(new Paragraph());
             para.ParagraphProperties = new ParagraphProperties();
             Run run = para.AppendChild(new Run());
-            if (fc != null)
+            if (formatCollection != null)
             {
-                para.ParagraphProperties = fc.ParagraphProperties;
-                run.RunProperties = fc.RunProperties;
+                para.ParagraphProperties = formatCollection.ParagraphProperties;
+                run.RunProperties = formatCollection.RunProperties;
             }
 
 
@@ -91,11 +91,28 @@ namespace Word
             m.Last().AppendChild(new Run(new Text(text)));
         }
 
+        public Table AddTable(int row, int column)
+        {
+            DocumentFormat.OpenXml.Wordprocessing.Table table = new DocumentFormat.OpenXml.Wordprocessing.Table();
+            body.AppendChild(table);
+            return new Table(table,row,column);
+        }
+
+        /// <summary>
+        /// 暂未完工版本
+        /// </summary>
+        /// <param name="styleID"></param>
+        /// <param name="styleName"></param>
+        /// <param name="aliases"></param>
         public void CreateParagraphStyle(string styleID, string styleName, string aliases = "")
         {
             CreateAndAddParagraphStyle.CreateParagraphStyle(mainPart.StyleDefinitionsPart, styleID, styleName, aliases);
         }
-
+        /// <summary>
+        /// 暂未完工版本
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns>StyleDefinitionsPart</returns>
         public StyleDefinitionsPart AddStylesPartToPackage(WordprocessingDocument doc = null)
         {
             doc = this.doc;

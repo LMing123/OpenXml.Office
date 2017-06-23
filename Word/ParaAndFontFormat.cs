@@ -16,52 +16,57 @@ namespace Word
     }
     public class ParaAndFontFormat
     {
-        public FormatCollection fc;
+        public FormatCollection formatCollection;
         public ParaAndFontFormat()
         {
-            fc = new FormatCollection();
+            formatCollection = new FormatCollection();
         }
         public void SetFontFormat(int fontSize, bool? bold = null, bool? italic = null, System.Drawing.Color? color = null, bool? shadow = null, HighlightColor? highlightColor = null)
         {
-            fc.RunProperties = new RunProperties();
-            fc.RunProperties.FontSize = new FontSize() { Val = (fontSize * 2).ToString() };
+            formatCollection.RunProperties = new RunProperties();
+            formatCollection.RunProperties.FontSize = new FontSize() { Val = (fontSize * 2).ToString() };
             if (bold != null)
             {
-                fc.RunProperties.Bold = new Bold() { Val = new DocumentFormat.OpenXml.OnOffValue(bold) };
+                formatCollection.RunProperties.Bold = new Bold() { Val = new DocumentFormat.OpenXml.OnOffValue(bold) };
             }
             if (color != null)
             {
-                fc.RunProperties.Color = new Color() { Val = String.Format("{0:X6}", color.Value.R << 16 | color.Value.G << 8 | color.Value.B) };
+                formatCollection.RunProperties.Color = new Color() { Val = String.Format("{0:X6}", color.Value.R << 16 | color.Value.G << 8 | color.Value.B) };
             }
             if (shadow != null)
             {
-                fc.RunProperties.Shadow = new Shadow() { Val = new DocumentFormat.OpenXml.OnOffValue(shadow) };
+                formatCollection.RunProperties.Shadow = new Shadow() { Val = new DocumentFormat.OpenXml.OnOffValue(shadow) };
             }
             if (highlightColor != null)
             {
-                fc.RunProperties.Highlight = new Highlight() { Val = (HighlightColorValues)highlightColor };
+                formatCollection.RunProperties.Highlight = new Highlight() { Val = (HighlightColorValues)highlightColor };
             }
             if (italic != null)
             {
-                fc.RunProperties.Italic = new Italic() { Val = new DocumentFormat.OpenXml.OnOffValue(italic) };
+                formatCollection.RunProperties.Italic = new Italic() { Val = new DocumentFormat.OpenXml.OnOffValue(italic) };
             }
         }
-        public void SetParaFormat(int? firstLineChars = null, JustificationValues? justificationValues = null, ParagraphStyle? paragraphStyle = null)
+        public void SetParaFormat(int? firstLineChars = null, JustificationValues? justificationValues = null, ParagraphStyle? paragraphStyle = null, int? outlineLevel = null)
         {
-            fc.ParagraphProperties = new ParagraphProperties();
+            formatCollection.ParagraphProperties = new ParagraphProperties();
             if (firstLineChars != null)
             {
-                fc.ParagraphProperties.Indentation = new Indentation() { FirstLineChars = firstLineChars * 100 };//首行缩进
+                formatCollection.ParagraphProperties.Indentation = new Indentation() { FirstLineChars = firstLineChars * 100 };//首行缩进
             }
             if (justificationValues != null)
             {
-                fc.ParagraphProperties.Justification = new Justification() { Val = (DocumentFormat.OpenXml.Wordprocessing.JustificationValues)justificationValues };
+                formatCollection.ParagraphProperties.Justification = new Justification() { Val = (DocumentFormat.OpenXml.Wordprocessing.JustificationValues)justificationValues };
             }
             if (paragraphStyle != null)
             {
-                
-                fc.ParagraphProperties.ParagraphStyleId = new ParagraphStyleId() { Val = paragraphStyle.ToString() };
-                fc.ParagraphProperties.OutlineLevel = new OutlineLevel() { Val = (int)paragraphStyle.Value-1 };
+
+                formatCollection.ParagraphProperties.ParagraphStyleId = new ParagraphStyleId() { Val = paragraphStyle.ToString() };
+                formatCollection.ParagraphProperties.OutlineLevel = new OutlineLevel() { Val = (int)paragraphStyle.Value - 1 };
+            }
+            if (outlineLevel != null)
+            {
+                formatCollection.ParagraphProperties.OutlineLevel = new OutlineLevel() { Val = outlineLevel };
+
             }
         }
     }
