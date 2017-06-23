@@ -15,7 +15,7 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            Docments doc = new Docments(@"d:\", "test_word.docx");
+            Docments doc = new Docments(@"C:\Users\Zhang\Documents\ ","test_word.docx");
 
             doc.AddStylesPartToPackage();
             doc.CreateParagraphStyle(ParagraphStyle.Heading1.ToString(), ParagraphStyle.Heading1.ToString());
@@ -27,6 +27,9 @@ namespace Test
             formatCollection.SetParaFormat(paragraphStyle: ParagraphStyle.Heading2);
             doc.AddParagraph("this is a test para", formatCollection.formatCollection);
             doc.AddParagraph();
+            formatCollection.SetFontFormat(30, true, true, color: Color.AliceBlue);
+          //  formatCollection.SetParaFormat(paragraphStyle: ParagraphStyle.Heading1);
+            doc.AddParagraph("this is a new para",formatCollection.formatCollection);
             
             doc.AddText("123");
 
@@ -41,7 +44,7 @@ namespace Test
 
 
             Console.WriteLine();
-            System.Diagnostics.Process.Start(@"d:\test_word.docx");
+            System.Diagnostics.Process.Start(@"C:\Users\Zhang\Documents\test_word.docx");
             Console.Read();
         }
       

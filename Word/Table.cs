@@ -75,27 +75,22 @@ namespace Word
 
         public void MergeCell(int row, int column, int mergerow, int mergecolumn)
         {
-            var i = table.Elements<TableRow>().First();
-            var j = i.First();
-                var m = (TableCellProperties)j.First();
-                m.HorizontalMerge = new HorizontalMerge() { Val = MergedCellValues.Restart };
-                var j1 = j.ElementsAfter();
-            foreach(var k in j1)
+
+            foreach(var tablerow in table)
             {
-               var  k1 =(TableCellProperties) k.First();
 
-               k1 .HorizontalMerge = new HorizontalMerge() { Val = MergedCellValues.Continue };
             }
+            //var i = table.Elements<TableRow>().First();
+            //var j = i.First();
+            //    var m = (TableCellProperties)j.First();
+            //    m.HorizontalMerge = new HorizontalMerge() { Val = MergedCellValues.Restart };
+            //    var j1 = j.ElementsAfter();
+            //foreach(var k in j1)
+            //{
+            //   var  k1 =(TableCellProperties) k.First();
 
-            //var j = i.Elements<TableCell>().First();
-            //var k = j.Elements<TableCellProperties>().First();
-            //k.HorizontalMerge= new HorizontalMerge() { Val = MergedCellValues.Restart };
-            //var j1 = i.Elements<TableCell>().ElementAt(2);
-            //var k1 = j.Elements<TableCellProperties>().First();
-
-            //k1.HorizontalMerge = new HorizontalMerge() { Val = MergedCellValues.Continue };
-
-
+            //   k1 .HorizontalMerge = new HorizontalMerge() { Val = MergedCellValues.Continue };
+            //}
         }
 
         private void CreateTable(int row, int column)

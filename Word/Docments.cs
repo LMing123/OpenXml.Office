@@ -76,8 +76,16 @@ namespace Word
             Run run = para.AppendChild(new Run());
             if (formatCollection != null)
             {
-                para.ParagraphProperties = formatCollection.ParagraphProperties;
-                run.RunProperties = formatCollection.RunProperties;
+                if(formatCollection.ParagraphProperties!=null)
+                {
+                    para.ParagraphProperties = (ParagraphProperties)formatCollection.ParagraphProperties.Clone();
+
+                }
+                if(formatCollection.RunProperties!=null)
+                {
+                    run.RunProperties = (RunProperties)formatCollection.RunProperties.Clone();
+
+                }
             }
 
 
