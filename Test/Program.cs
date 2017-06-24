@@ -33,9 +33,11 @@ namespace Test
             
             doc.AddText("123");
 
-           var table= doc.AddTable(2, 3);
-            table.MergeCell(1, 1, 1, 1);
-            
+           var table= doc.AddTable(3, 3);
+            //table.MergeCell(1, 2, 1, 3);
+            //table.MergeCell(2, 1, 2, 2);
+            table.MergeCell(1, 1, 2, 3);
+
 
             doc.Close();
 

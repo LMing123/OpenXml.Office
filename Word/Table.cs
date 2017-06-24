@@ -43,9 +43,9 @@ namespace Word
                 borders.RightBorder = new RightBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 5 };
                 borders.InsideHorizontalBorder = new InsideHorizontalBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 5 };
                 borders.InsideVerticalBorder = new InsideVerticalBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 5 };
-                if(topBorder!=null)
+                if (topBorder != null)
                 {
-                    borders.TopBorder.Size =(UInt32)topBorder;
+                    borders.TopBorder.Size = (UInt32)topBorder;
                 }
                 if (bottomBorder != null)
                 {
@@ -63,7 +63,7 @@ namespace Word
                 {
                     borders.InsideHorizontalBorder.Size = (UInt32)insideHorizontalBorder;
                 }
-                if(insideVerticalBorder!=null)
+                if (insideVerticalBorder != null)
                 {
                     borders.InsideVerticalBorder.Size = (UInt32)insideVerticalBorder;
                 }
@@ -71,26 +71,171 @@ namespace Word
 
         }
 
-        //TODO not finished
 
         public void MergeCell(int row, int column, int mergerow, int mergecolumn)
         {
-
-            foreach(var tablerow in table)
+            int tem_row = 1;
+            int tem_column = 1;
+            bool begin = false;
+            if (row == mergerow)
             {
+                foreach (var tableRow in table)
+                {
+                    if (tableRow.LocalName == "tr")
+                    {
+                        if (row == tem_row)
+                        {
+                            tem_column = 1;
+                            foreach (var cell in tableRow)
+                            {
+                                if (cell.LocalName == "tc")
+                                {
+                                    if (tem_column > mergecolumn)
+                                    {
+                                        return;
+                                    }
+                                    if (column == tem_column && begin == false)
+                                    {
+                                        foreach (var cellProperties in cell)
+                                        {
+                                            if (cellProperties.LocalName == "tcPr")
+                                            {
+                                                var cPr = (TableCellProperties)cellProperties;
+                                                cPr.HorizontalMerge = new HorizontalMerge() { Val = MergedCellValues.Restart };
+                                                begin = true;
+                                            }
 
+                                        }
+
+                                    }
+                                    if (column < tem_column)
+                                    {
+                                        foreach (var cellProperties in cell)
+                                        {
+                                            if (cellProperties.LocalName == "tcPr")
+                                            {
+                                                var cPr = (TableCellProperties)cellProperties;
+                                                cPr.VerticalMerge = new VerticalMerge() { Val = MergedCellValues.Continue };                                                cPr.HorizontalMerge = new HorizontalMerge() { Val = MergedCellValues.Continue };
+                                                //  begin = true;
+                                            }
+                                        }
+                                    }
+                                    tem_column++;
+                                }
+                            }
+
+                        }
+                        tem_row++;
+                    }
+                }
             }
-            //var i = table.Elements<TableRow>().First();
-            //var j = i.First();
-            //    var m = (TableCellProperties)j.First();
-            //    m.HorizontalMerge = new HorizontalMerge() { Val = MergedCellValues.Restart };
-            //    var j1 = j.ElementsAfter();
-            //foreach(var k in j1)
-            //{
-            //   var  k1 =(TableCellProperties) k.First();
 
-            //   k1 .HorizontalMerge = new HorizontalMerge() { Val = MergedCellValues.Continue };
-            //}
+            if(row!=mergerow)
+            {
+                foreach (var tableRow in table)
+                {
+                    if (tableRow.LocalName == "tr")
+                    {
+                        if(tem_row>mergerow)
+                        {
+                            return;
+                        }
+                        if (row == tem_row)
+                        {
+                            tem_column = 1;
+                            foreach (var cell in tableRow)
+                            {
+                                if (cell.LocalName == "tc")
+                                {
+                                    if (tem_column > mergecolumn)
+                                    {
+                                        break;
+                                    }
+                                    if (column == tem_column && begin == false)
+                                    {
+                                        foreach (var cellProperties in cell)
+                                        {
+                                            if (cellProperties.LocalName == "tcPr")
+                                            {
+                                                var cPr = (TableCellProperties)cellProperties;
+                                                cPr.HorizontalMerge = new HorizontalMerge() { Val = MergedCellValues.Restart };
+                                                cPr.VerticalMerge = new VerticalMerge() { Val = MergedCellValues.Restart };
+                                                begin = true;
+                                            }
+
+                                        }
+
+                                    }
+                                    if (column < tem_column)
+                                    {
+                                        foreach (var cellProperties in cell)
+                                        {
+                                            if (cellProperties.LocalName == "tcPr")
+                                            {
+
+                                                var cPr = (TableCellProperties)cellProperties;
+                                                cPr.HorizontalMerge = new HorizontalMerge() { Val = MergedCellValues.Continue };
+                                                cPr.VerticalMerge = new VerticalMerge() { Val = MergedCellValues.Restart };
+                                                //  begin = true;
+                                            }
+                                        }
+                                    }
+                                    tem_column++;
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            tem_column = 1;
+                            begin = false;
+                            foreach (var cell in tableRow)
+                            {
+                                if (cell.LocalName == "tc")
+                                {
+                                    if (tem_column > mergecolumn)
+                                    {
+                                        break;
+                                    }
+                                    if (column == tem_column && begin == false)
+                                    {
+                                        foreach (var cellProperties in cell)
+                                        {
+                                            if (cellProperties.LocalName == "tcPr")
+                                            {
+                                                var cPr = (TableCellProperties)cellProperties;
+                                                cPr.HorizontalMerge = new HorizontalMerge() { Val = MergedCellValues.Restart };
+                                                cPr.VerticalMerge = new VerticalMerge() { Val = MergedCellValues.Continue };
+                                                begin = true;
+                                            }
+
+                                        }
+
+                                    }
+                                    if (column < tem_column)
+                                    {
+                                        foreach (var cellProperties in cell)
+                                        {
+                                            if (cellProperties.LocalName == "tcPr")
+                                            {
+
+                                                var cPr = (TableCellProperties)cellProperties;
+                                                cPr.HorizontalMerge = new HorizontalMerge() { Val = MergedCellValues.Continue };
+                                                cPr.VerticalMerge = new VerticalMerge() { Val = MergedCellValues.Continue };
+                                                //  begin = true;
+                                            }
+                                        }
+                                    }
+                                    tem_column++;
+                                }
+                            }
+                        }
+                        tem_row++;
+                    }
+                }
+            }
+
+
         }
 
         private void CreateTable(int row, int column)
