@@ -27,6 +27,8 @@ namespace Test
             formatCollection.SetParaFormat(paragraphStyle: ParagraphStyle.Heading2);
             doc.AddParagraph("this is a test para", formatCollection.formatCollection);
             doc.AddParagraph();
+            formatCollection.SetFontFormat(20);
+            formatCollection.SetParaFormat(justificationValues: JustificationValues.Center);
             formatCollection.SetFontFormat(30, true, true, color: Color.AliceBlue);
           //  formatCollection.SetParaFormat(paragraphStyle: ParagraphStyle.Heading1);
             doc.AddParagraph("this is a new para",formatCollection.formatCollection);
@@ -37,6 +39,7 @@ namespace Test
             //table.MergeCell(1, 2, 1, 3);
             //table.MergeCell(2, 1, 2, 2);
             table.MergeCell(1, 1, 2, 3);
+            table.CellText(1, 1, "test",JustificationValues.Center);
 
 
             doc.Close();

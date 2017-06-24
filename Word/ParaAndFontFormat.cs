@@ -46,7 +46,14 @@ namespace Word
                 formatCollection.RunProperties.Italic = new Italic() { Val = new DocumentFormat.OpenXml.OnOffValue(italic) };
             }
         }
-        public void SetParaFormat(int? firstLineChars = null, JustificationValues? justificationValues = null, ParagraphStyle? paragraphStyle = null, int? outlineLevel = null)
+        /// <summary>
+        /// 设置段落格式
+        /// </summary>
+        /// <param name="firstLineChars">首行缩进</param>
+        /// <param name="justificationValues">对齐方式</param>
+        /// <param name="outlineLevel">大纲级别</param>        /// 
+        /// <param name="paragraphStyle">段落风格</param>
+        public void SetParaFormat(int? firstLineChars = null, JustificationValues? justificationValues = null, int? outlineLevel = null, ParagraphStyle? paragraphStyle = null)
         {
             formatCollection.ParagraphProperties = new ParagraphProperties();
             if (firstLineChars != null)

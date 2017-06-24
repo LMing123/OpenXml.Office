@@ -28,6 +28,11 @@ namespace Word
 
         }
 
+        public void SetRowStyle(int row, System.Drawing.Color? backgroundcolor = null, System.Drawing.Color? foregroundcolor = null, float? hight = null, int? size = null, string fontname = null, eParagraphAlignment? alignment = null, System.Drawing.Color? fontcolor = null, bool? bold = null, bool? italic = null, eUnderline? underline = null, eBuiltinStyle? style = null)
+        {
+
+        }
+
         public void AddBorder(bool hasBorder = true, int? topBorder = null, int? bottomBorder = null, int? leftBorder = null, int? rightBorder = null, int? insideHorizontalBorder = null, int? insideVerticalBorder = null)
         {
             if (hasBorder)
@@ -70,8 +75,60 @@ namespace Word
             }
 
         }
+        /// <summary>
+        /// 单元格添加文字
+        /// </summary>
+        /// <param name="row">行</param>
+        /// <param name="column">列</param>
+        /// <param name="text">要添加的文字</param>
+        /// <param name="justificationValues">对其方式</param>
+        public void CellText(int row, int column, string text, JustificationValues? justificationValues = null)
+        {
+            int tem_row = 1;
+            int tem_column;
+            foreach (var tablerow in table)
+            {
+                if (tablerow.LocalName != "tr" )
+                {                    
+                    continue;
+                }
+                if(tem_row!=row)
+                {
+                    tem_row++;
+                    continue;
+                }
+                tem_column = 1;
+                foreach (var cell in tablerow)
+                {
+                    if (cell.LocalName != "tc")
+                    {                      
+                        continue;
+                    }
+                    if (tem_column == column)
+                    {
+                        foreach (var cellPara in cell)
+                        {
+                            if (cellPara.LocalName == "p")
+                            {
+                                cell.RemoveChild(cellPara);
+                            }
+                        }
+                        cell.Append(new Paragraph(new Run(new Text() { Text = text })) { ParagraphProperties = new ParagraphProperties() { Justification = new Justification() { Val = (DocumentFormat.OpenXml.Wordprocessing.JustificationValues)justificationValues } } });
 
+                    }
+                    tem_column++;
 
+                }
+                tem_row++;
+            }
+        }
+        /// <summary>
+        /// 合并单元格
+        /// </summary>
+        /// <param name="row">开始行</param>
+        /// <param name="column">开始列</param>
+        /// <param name="mergerow">结束行</param>
+        /// <param name="mergecolumn">结束列</param>
         public void MergeCell(int row, int column, int mergerow, int mergecolumn)
         {
             int tem_row = 1;
@@ -115,7 +172,7 @@ namespace Word
                                             if (cellProperties.LocalName == "tcPr")
                                             {
                                                 var cPr = (TableCellProperties)cellProperties;
-                                                cPr.VerticalMerge = new VerticalMerge() { Val = MergedCellValues.Continue };                                                cPr.HorizontalMerge = new HorizontalMerge() { Val = MergedCellValues.Continue };
+                                                cPr.VerticalMerge = new VerticalMerge() { Val = MergedCellValues.Continue }; cPr.HorizontalMerge = new HorizontalMerge() { Val = MergedCellValues.Continue };
                                                 //  begin = true;
                                             }
                                         }
@@ -130,13 +187,13 @@ namespace Word
                 }
             }
 
-            if(row!=mergerow)
+            if (row != mergerow)
             {
                 foreach (var tableRow in table)
                 {
                     if (tableRow.LocalName == "tr")
                     {
-                        if(tem_row>mergerow)
+                        if (tem_row > mergerow)
                         {
                             return;
                         }
@@ -234,7 +291,6 @@ namespace Word
                     }
                 }
             }
-
 
         }
 
