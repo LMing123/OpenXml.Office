@@ -21,7 +21,7 @@ namespace Word
         {
             formatCollection = new FormatCollection();
         }
-        public void SetFontFormat(int fontSize, bool? bold = null, bool? italic = null, System.Drawing.Color? color = null, bool? shadow = null, HighlightColor? highlightColor = null)
+        public void SetFontFormat(int fontSize, bool? bold = null, bool? italic = null, System.Drawing.Color? color = null, bool? shadow = null, HighlightColor? highlightColor = null,UnderlineValues?underlineValues=null)
         {
             formatCollection.RunProperties = new RunProperties();
             formatCollection.RunProperties.FontSize = new FontSize() { Val = (fontSize * 2).ToString() };
@@ -44,6 +44,11 @@ namespace Word
             if (italic != null)
             {
                 formatCollection.RunProperties.Italic = new Italic() { Val = new DocumentFormat.OpenXml.OnOffValue(italic) };
+            }
+            if(underlineValues!=null)
+            {
+                formatCollection.RunProperties.Underline = new Underline() { Val = (UnderlineValues)underlineValues };
+
             }
         }
         /// <summary>
@@ -75,6 +80,8 @@ namespace Word
                 formatCollection.ParagraphProperties.OutlineLevel = new OutlineLevel() { Val = outlineLevel };
 
             }
+          //  formatCollection.ParagraphProperties.Shading=new Shading() { }
+
         }
     }
 }

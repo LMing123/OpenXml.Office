@@ -49,6 +49,7 @@
     <Compile Include="Docments.cs" />
     <Compile Include="Enum\HighlightColor.cs" />
     <Compile Include="Enum\JustificationValues.cs" />
+    <Compile Include="Enum\UnderLinesValues.cs" />
     <Compile Include="ParaAndFontFormat.cs" />
     <Compile Include="Enum\ParagraphStyle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -28,8 +28,9 @@ namespace Word
 
         }
 
-        public void SetRowStyle(int row, System.Drawing.Color? backgroundcolor = null, System.Drawing.Color? foregroundcolor = null, float? hight = null, int? size = null, string fontname = null, eParagraphAlignment? alignment = null, System.Drawing.Color? fontcolor = null, bool? bold = null, bool? italic = null, eUnderline? underline = null, eBuiltinStyle? style = null)
+        public void SetCellStyle(int row,int column, System.Drawing.Color? backgroundcolor = null, System.Drawing.Color? foregroundcolor = null, float? hight = null, int? size = null, string fontname = null, eParagraphAlignment? alignment = null, System.Drawing.Color? fontcolor = null, bool? bold = null, bool? italic = null, UnderlineValues? underlineValues = null)
         {
+           
 
         }
 
