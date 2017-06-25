@@ -41,6 +41,10 @@ namespace Test
             table.MergeCell(1, 1, 2, 3);
             table.CellText(1, 1, "test",JustificationValues.Center);
 
+            table.SetCellStyle(1, 1, Color.Azure);
+
+            table.SetCellStyle(3,1, Color.DarkBlue);
+            table.SetCellStyle(3, 2, Color.DarkCyan);
 
             doc.Close();
 

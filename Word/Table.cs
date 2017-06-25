@@ -28,12 +28,59 @@ namespace Word
 
         }
 
-        public void SetCellStyle(int row,int column, System.Drawing.Color? backgroundcolor = null, System.Drawing.Color? foregroundcolor = null, float? hight = null, int? size = null, string fontname = null, eParagraphAlignment? alignment = null, System.Drawing.Color? fontcolor = null, bool? bold = null, bool? italic = null, UnderlineValues? underlineValues = null)
+        public void SetCellStyle(int row,int column, System.Drawing.Color? groundColor= null, float? hight = null, int? size = null, string fontname = null,/* eParagraphAlignment? alignment = null,*/ System.Drawing.Color? fontcolor = null, bool? bold = null, bool? italic = null, UnderlineValues? underlineValues = null)
         {
-           
+            int tem_row = 1;
+            int tem_column = 1;
+            //  var cell= table.Where(i => i.LocalName == "tr").Where(i=>i.LocalName=="tc");
 
+            foreach (var tableRow in table)
+            {
+                if (tableRow.LocalName == "tr")
+                {
+                    if (row == tem_row)
+                    {
+                        tem_column = 1;
+                        foreach (var cell in tableRow)
+                        {
+                            if (cell.LocalName == "tc")
+                            {
+                                if (column == tem_column)
+                                {
+                                    foreach (var cellProperties in cell)
+                                    {
+                                        if (cellProperties.LocalName == "tcPr")
+                                        {
+                                            var cPr = (TableCellProperties)cellProperties;
+                                            if (groundColor != null)
+                                            {
+                                                cPr.Shading = new Shading() { Fill = String.Format("{0:X6}", groundColor.Value.R << 16 | groundColor.Value.G << 8 | groundColor.Value.B) };
+                                            }
+                                            return;
+                                        }
+                                    }
+                                }
+                                tem_column++;
+
+                            }
+                        }
+                    }
+                    tem_row++;
+                }
+               
+            }
         }
 
+        /// <summary>
+        /// 设置边框
+        /// </summary>
+        /// <param name="hasBorder"></param>
+        /// <param name="topBorder"></param>
+        /// <param name="bottomBorder"></param>
+        /// <param name="leftBorder"></param>
+        /// <param name="rightBorder"></param>
+        /// <param name="insideHorizontalBorder"></param>
+        /// <param name="insideVerticalBorder"></param>
         public void AddBorder(bool hasBorder = true, int? topBorder = null, int? bottomBorder = null, int? leftBorder = null, int? rightBorder = null, int? insideHorizontalBorder = null, int? insideVerticalBorder = null)
         {
             if (hasBorder)

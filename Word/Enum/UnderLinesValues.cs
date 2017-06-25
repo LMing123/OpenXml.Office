@@ -10,7 +10,6 @@ namespace Word.Enum
     //
     // 摘要:
     //     Defines the UnderlineValues enumeration.
-    [GeneratedCode("DomGen", "2.0")]
     public enum UnderlineValues
     {
         //
