@@ -27,7 +27,20 @@ namespace Word
 
 
         }
-
+        /// <summary>
+        /// 设置单元格格式
+        /// 目前只底色设置
+        /// </summary>
+        /// <param name="row">设置的单元格所在行</param>
+        /// <param name="column">设置的单元格所在列</param>
+        /// <param name="groundColor">设置的单元格底色</param>
+        /// <param name="hight">not finished</param>
+        /// <param name="size">not finished</param>
+        /// <param name="fontname">not finished</param>
+        /// <param name="fontcolor">not finished</param>
+        /// <param name="bold">not finished</param>
+        /// <param name="italic">not finished</param>
+        /// <param name="underlineValues">not finished</param>
         public void SetCellStyle(int row,int column, System.Drawing.Color? groundColor= null, float? hight = null, int? size = null, string fontname = null,/* eParagraphAlignment? alignment = null,*/ System.Drawing.Color? fontcolor = null, bool? bold = null, bool? italic = null, UnderlineValues? underlineValues = null)
         {
             int tem_row = 1;
