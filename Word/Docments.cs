@@ -112,6 +112,7 @@ namespace Word
         /// <param name="styleID"></param>
         /// <param name="styleName"></param>
         /// <param name="aliases"></param>
+        //TODO 创建自定义段落风格未完成
         public void CreateParagraphStyle(string styleID, string styleName, string aliases = "")
         {
             CreateAndAddParagraphStyle.CreateParagraphStyle(mainPart.StyleDefinitionsPart, styleID, styleName, aliases);
