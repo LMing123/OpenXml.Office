@@ -43,8 +43,7 @@ namespace Test
 
             table.SetCellStyle(1, 1, Color.Azure);
 
-            table.SetCellStyle(3,1, Color.DarkBlue);
-            table.SetCellStyle(3, 2, Color.DarkCyan);
+            table.SetRowStyle(3, Color.Cyan);
 
             doc.Close();
 

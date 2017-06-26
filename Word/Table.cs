@@ -25,10 +25,64 @@ namespace Word
             CreateTable(row, column);
             AddBorder();
 
+        }
+        /// <summary>
+        /// 设置表格行格式
+        /// </summary>
+        /// <param name="row"设定行></param>
+        /// <param name="groundColor">背景色</param>
+        /// <param name="hight"></param>
+        /// <param name="size"></param>
+        /// <param name="fontname"></param>
+        /// <param name="fontcolor"></param>
+        /// <param name="bold"></param>
+        /// <param name="italic"></param>
+        /// <param name="underlineValues"></param>
+        //TODO cell paragraph style not finish 
+        public void SetRowStyle(int row, System.Drawing.Color? groundColor = null, float? hight = null, int? size = null, string fontname = null,/* eParagraphAlignment? alignment = null,*/ System.Drawing.Color? fontcolor = null, bool? bold = null, bool? italic = null, UnderlineValues? underlineValues = null)
+        {
+            int tem_row = 1;
+            int tem_column = 1;
+            //  var cell= table.Where(i => i.LocalName == "tr").Where(i=>i.LocalName=="tc");
 
+            foreach (var tableRow in table)
+            {
+                if (tableRow.LocalName == "tr")
+                {
+                    if (row == tem_row)
+                    {
+                        tem_column = 1;
+                        foreach (var cell in tableRow)
+                        {
+                            if (cell.LocalName == "tc")
+                            {
+                                foreach (var cellProperties in cell)
+                                {
+                                    if (cellProperties.LocalName == "tcPr")
+                                    {
+                                        var cPr = (TableCellProperties)cellProperties;
+                                        if (groundColor != null)
+                                        {
+                                            cPr.Shading = new Shading() { Fill = String.Format("{0:X6}", groundColor.Value.R << 16 | groundColor.Value.G << 8 | groundColor.Value.B) };
+                                        }
+
+                                    }
+                                }
+                                tem_column++;
+
+                            }
+                        }
+                        return;
+                    }
+                    tem_row++;
+                }
+
+            }
         }
 
-        public void SetCellStyle(int row,int column, System.Drawing.Color? groundColor= null, float? hight = null, int? size = null, string fontname = null,/* eParagraphAlignment? alignment = null,*/ System.Drawing.Color? fontcolor = null, bool? bold = null, bool? italic = null, UnderlineValues? underlineValues = null)
+        //TODO cell paragraph style not finish 
+
+        public void SetCellStyle(int row, int column, System.Drawing.Color? groundColor = null, float? hight = null, int? size = null, string fontname = null,/* eParagraphAlignment? alignment = null,*/ System.Drawing.Color? fontcolor = null, bool? bold = null, bool? italic = null, UnderlineValues? underlineValues = null)
         {
             int tem_row = 1;
             int tem_column = 1;
@@ -67,7 +121,7 @@ namespace Word
                     }
                     tem_row++;
                 }
-               
+
             }
         }
 
@@ -136,11 +190,11 @@ namespace Word
             int tem_column;
             foreach (var tablerow in table)
             {
-                if (tablerow.LocalName != "tr" )
-                {                    
+                if (tablerow.LocalName != "tr")
+                {
                     continue;
                 }
-                if(tem_row!=row)
+                if (tem_row != row)
                 {
                     tem_row++;
                     continue;
@@ -149,7 +203,7 @@ namespace Word
                 foreach (var cell in tablerow)
                 {
                     if (cell.LocalName != "tc")
-                    {                      
+                    {
                         continue;
                     }
                     if (tem_column == column)
