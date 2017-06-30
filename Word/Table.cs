@@ -232,6 +232,10 @@ namespace Word
                             cell.Append(new Paragraph(new Run(new Text() { Text = text })) { ParagraphProperties = new ParagraphProperties() { Justification = new Justification() { Val = (DocumentFormat.OpenXml.Wordprocessing.JustificationValues)justificationValues } } });
 
                         }
+                        else
+                        {
+                            cell.Append(new Paragraph(new Run(new Text() { Text = text })));
+                        }
 
                     }
                     tem_column++;

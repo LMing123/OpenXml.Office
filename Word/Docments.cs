@@ -33,7 +33,9 @@ namespace Word
             }
             else
             {
-                doc = WordprocessingDocument.Open(path, true);
+                doc = WordprocessingDocument.Create(path, WordprocessingDocumentType.Document);
+
+                //doc = WordprocessingDocument.Open(path, true);
                 if (doc.MainDocumentPart == null)
                 {
                     mainPart = doc.AddMainDocumentPart();
