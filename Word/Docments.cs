@@ -26,7 +26,7 @@ namespace Word
         {
             if (!File.Exists(path))
             {
-                doc = WordprocessingDocument.Create(path , WordprocessingDocumentType.Document);
+                doc = WordprocessingDocument.Create(path, WordprocessingDocumentType.Document);
                 mainPart = doc.AddMainDocumentPart();
                 mainPart.Document = new Document();
                 body = mainPart.Document.AppendChild(new Body());
@@ -74,7 +74,7 @@ namespace Word
         public void AddBlankLine(int row)
         {
 
-            for(int i=0;i<row;i++)
+            for (int i = 0; i < row; i++)
             {
                 Paragraph para = body.AppendChild(new Paragraph());
                 Run run = para.AppendChild(new Run());
@@ -90,12 +90,12 @@ namespace Word
             Run run = para.AppendChild(new Run());
             if (formatCollection != null)
             {
-                if(formatCollection.ParagraphProperties!=null)
+                if (formatCollection.ParagraphProperties != null)
                 {
                     para.ParagraphProperties = (ParagraphProperties)formatCollection.ParagraphProperties.Clone();
 
                 }
-                if(formatCollection.RunProperties!=null)
+                if (formatCollection.RunProperties != null)
                 {
                     run.RunProperties = (RunProperties)formatCollection.RunProperties.Clone();
 
@@ -116,14 +116,14 @@ namespace Word
         public void AddBlackPage()
         {
             Paragraph para = body.AppendChild(new Paragraph());
-            Run run = para.AppendChild(new Run(new Break() { Type=BreakValues.Page}));
+            Run run = para.AppendChild(new Run(new Break() { Type = BreakValues.Page }));
         }
 
         public void PasteFrom(string path)
         {
             if (!File.Exists(path))
             {
-                throw new Exception ("文件不存在");
+                throw new Exception("文件不存在");
             }
             else
             {
@@ -139,25 +139,23 @@ namespace Word
                         var stylePart = doc.MainDocumentPart.StyleDefinitionsPart;
                         stylePart.Styles.Append(copy_doc.MainDocumentPart.StyleDefinitionsPart.Styles.CloneNode(true));
                     }
-                     var imagePart = doc.MainDocumentPart.ImageParts;
-                  
-                  
+
+
                     //复制图片
-                    var copy_content = content.Select(t => t.CloneNode(true));
                     foreach (var item in copy_doc.MainDocumentPart.ImageParts)
                     {
                         var tem = item.HyperlinkRelationships;
-                        var type = item.ContentType;            
+                        var type = item.ContentType;
                         var id = copy_doc.MainDocumentPart.GetIdOfPart(item);
-                        var pic= doc.MainDocumentPart.AddImagePart(type, id);
+                        var pic = doc.MainDocumentPart.AddImagePart(type, id);
                         pic.FeedData(item.GetStream());
                     }
-                      
+
                     body.Append(content.Select(t => t.CloneNode(true)));
                     copy_doc.Close();
                 }
 
-                    
+
             }
         }
 
@@ -165,12 +163,12 @@ namespace Word
         {
             DocumentFormat.OpenXml.Wordprocessing.Table table = new DocumentFormat.OpenXml.Wordprocessing.Table();
             body.AppendChild(table);
-            return new Table(table,row,column);
+            return new Table(table, row, column);
         }
 
-        public Chart AddChart(string chartName,string rid)
+        public Chart AddChart(string chartName, string rid)
         {
-         
+
             ChartPart chartPart = mainPart.AddNewPart<ChartPart>(rid);
             //EmbeddedPackagePart embeddedPackagePart1 = chartPart.AddNewPart<EmbeddedPackagePart>("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "rId3");
             //GenerateEmbeddedPackagePart1Content(embeddedPackagePart1);

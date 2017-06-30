@@ -24,7 +24,7 @@ namespace Word
             this.chartPart = chartpart;
         }
 
-        public void AddNewBarAndLineChart(List<ChartSubArea> barChartList,int top,int bottom)
+        public void AddNewBarAndLineChart(List<ChartSubArea> barChartList,double top, double bottom)
         {
 
             ChartSpace chartSpace1 = new ChartSpace();
