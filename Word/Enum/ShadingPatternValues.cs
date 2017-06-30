@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Word.Enum
+namespace Word
 {
     //
     // 摘要:

@@ -93,11 +93,8 @@ namespace Word
         /// <param name="bold">not finished</param>
         /// <param name="italic">not finished</param>
         /// <param name="underlineValues">not finished</param>
-        public void SetCellStyle(int row,int column, System.Drawing.Color? groundColor= null, float? hight = null, int? size = null, string fontname = null,/* eParagraphAlignment? alignment = null,*/ System.Drawing.Color? fontcolor = null, bool? bold = null, bool? italic = null, UnderlineValues? underlineValues = null)
-        //TODO cell paragraph style not finish 
-
         public void SetCellStyle(int row, int column, System.Drawing.Color? groundColor = null, float? hight = null, int? size = null, string fontname = null,/* eParagraphAlignment? alignment = null,*/ System.Drawing.Color? fontcolor = null, bool? bold = null, bool? italic = null, UnderlineValues? underlineValues = null)
->>>>>>> origin/master
+
         {
             int tem_row = 1;
             int tem_column = 1;
@@ -230,7 +227,11 @@ namespace Word
                                 cell.RemoveChild(cellPara);
                             }
                         }
-                        cell.Append(new Paragraph(new Run(new Text() { Text = text })) { ParagraphProperties = new ParagraphProperties() { Justification = new Justification() { Val = (DocumentFormat.OpenXml.Wordprocessing.JustificationValues)justificationValues } } });
+                        if(justificationValues!=null)
+                        {
+                            cell.Append(new Paragraph(new Run(new Text() { Text = text })) { ParagraphProperties = new ParagraphProperties() { Justification = new Justification() { Val = (DocumentFormat.OpenXml.Wordprocessing.JustificationValues)justificationValues } } });
+
+                        }
 
                     }
                     tem_column++;

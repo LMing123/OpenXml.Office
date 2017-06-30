@@ -21,10 +21,14 @@ namespace Word
         {
             formatCollection = new FormatCollection();
         }
-        public void SetFontFormat(int fontSize, bool? bold = null, bool? italic = null, System.Drawing.Color? color = null, bool? shadow = null, HighlightColor? highlightColor = null,UnderlineValues?underlineValues=null)
+        public void SetFontFormat(int fontSize,string fontName=null, bool? bold = null, bool? italic = null, System.Drawing.Color? color = null, bool? shadow = null, HighlightColor? highlightColor = null,UnderlineValues?underlineValues=null)
         {
             formatCollection.RunProperties = new RunProperties();
             formatCollection.RunProperties.FontSize = new FontSize() { Val = (fontSize * 2).ToString() };
+            if(fontName!=null)
+            {
+                formatCollection.RunProperties.RunFonts = new RunFonts() { EastAsia = fontName };
+            }
             if (bold != null)
             {
                 formatCollection.RunProperties.Bold = new Bold() { Val = new DocumentFormat.OpenXml.OnOffValue(bold) };
@@ -47,9 +51,10 @@ namespace Word
             }
             if(underlineValues!=null)
             {
-                formatCollection.RunProperties.Underline = new Underline() { Val = (UnderlineValues)underlineValues };
+                formatCollection.RunProperties.Underline = new Underline() { Val =(DocumentFormat.OpenXml.Wordprocessing.UnderlineValues) underlineValues };
 
             }
+
         }
         /// <summary>
         /// 设置段落格式
