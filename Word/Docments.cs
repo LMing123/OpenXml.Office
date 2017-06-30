@@ -22,18 +22,18 @@ namespace Word
         MainDocumentPart mainPart;
         Body body;
 
-        public Docments(string path, string docName)
+        public Docments(string path)
         {
             if (!File.Exists(path))
             {
-                doc = WordprocessingDocument.Create(path + @"\" + docName, WordprocessingDocumentType.Document);
+                doc = WordprocessingDocument.Create(path , WordprocessingDocumentType.Document);
                 mainPart = doc.AddMainDocumentPart();
                 mainPart.Document = new Document();
                 body = mainPart.Document.AppendChild(new Body());
             }
             else
             {
-                doc = WordprocessingDocument.Open(path + @"\" + docName, true);
+                doc = WordprocessingDocument.Open(path, true);
                 if (doc.MainDocumentPart == null)
                 {
                     mainPart = doc.AddMainDocumentPart();
@@ -166,9 +166,10 @@ namespace Word
             return new Table(table,row,column);
         }
 
-        public Chart AddChart(string chartName)
+        public Chart AddChart(string chartName,string rid)
         {
-            ChartPart chartPart = mainPart.AddNewPart<ChartPart>("rId4");
+         
+            ChartPart chartPart = mainPart.AddNewPart<ChartPart>(rid);
             //EmbeddedPackagePart embeddedPackagePart1 = chartPart.AddNewPart<EmbeddedPackagePart>("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "rId3");
             //GenerateEmbeddedPackagePart1Content(embeddedPackagePart1);
             Paragraph paragraph = new Paragraph() { RsidParagraphAddition = "00C75AEB", RsidRunAdditionDefault = "000F3EFF" };
@@ -180,13 +181,13 @@ namespace Word
             dw.Inline inline = new dw.Inline();
             inline.Append(new dw.Extent() { Cx = 5274310L, Cy = 3076575L });
             inline.Append(new dw.EffectExtent() { LeftEdge = 0, TopEdge = 0, RightEdge = 2540, BottomEdge = 9525 });
-            dw.DocProperties docPros = new dw.DocProperties() { Id = (UInt32Value)1U, Name = chartName };
+            dw.DocProperties docPros = new dw.DocProperties() { Id = 6666666, Name = chartName };
             inline.Append(docPros);
             inline.Append(new dw.NonVisualGraphicFrameDrawingProperties());
 
             d.Graphic g = new d.Graphic();
             d.GraphicData graphicData = new d.GraphicData() { Uri = "http://schemas.openxmlformats.org/drawingml/2006/chart" };
-            dc.ChartReference chartReference = new dc.ChartReference() { Id = "rId4" };
+            dc.ChartReference chartReference = new dc.ChartReference() { Id = rid };
             graphicData.Append(chartReference);
 
             g.Append(graphicData);

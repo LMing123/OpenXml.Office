@@ -16,7 +16,7 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            Docments doc = new Docments(@"C:\Users\Zhang\Documents\ ","test_word.docx");
+            Docments doc = new Docments(@"C:\Users\Zhang\Documents\test_word.docx");
             // doc.AddStyle();
             // doc.AddStylesPartToPackage();
             //  doc.CreateParagraphStyle(ParagraphStyle.Heading1.ToString(), ParagraphStyle.Heading1.ToString());
@@ -35,23 +35,17 @@ namespace Test
 
             //doc.AddText("123");
 
-            //var table = doc.AddTable(3, 3);
-            ////table.MergeCell(1, 2, 1, 3);
-            ////table.MergeCell(2, 1, 2, 2);
-            //table.MergeCell(1, 1, 2, 3);
-            //table.CellText(1, 1, "test", JustificationValues.Center);
+            var table = doc.AddTable(3, 3);
+            //table.MergeCell(1, 2, 1, 3);
+            //table.MergeCell(2, 1, 2, 2);
+            table.MergeCell(2, 1, 3, 1);
+            table.CellText(1, 1, "test", JustificationValues.Center);
 
-            //table.SetCellStyle(1, 1, Color.Azure);
+            table.SetCellStyle(1, 1, Color.Azure);
 
-            //table.SetRowStyle(3, Color.Cyan);
+            table.SetRowStyle(3, Color.Cyan);
 
-            //var chart = doc.AddChart("chart1");
-            //List<ChartSubArea> chartAreas = new List<ChartSubArea>();
-            //chartAreas.Add(new ChartSubArea() { Color = SchemeColorValues.Accent1, Label = "1st Qtr", Value = "8.2" });
-            //chartAreas.Add(new ChartSubArea() { Color = SchemeColorValues.Accent2, Label = "2st Qtr", Value = "3.2" });
-            //chartAreas.Add(new ChartSubArea() { Color = SchemeColorValues.Accent3, Label = "3st Qtr", Value = "1.4" });
-            //chartAreas.Add(new ChartSubArea() { Color = SchemeColorValues.Accent4, Label = "4st Qtr", Value = "1.2" });
-            //chart.AddNewBarAndLineChart(chartAreas,10,5);
+
 
             Word.ParaAndFontFormat fc = new Word.ParaAndFontFormat();
             fc.SetFontFormat(fontSize: 22, fontName: "华文中宋", color: Color.FromArgb(68, 84, 106));
@@ -68,17 +62,17 @@ namespace Test
             doc.AddBlackPage();
             doc.AddParagraph("this is a new page");
 
-            doc.PasteFrom(@"D:\bspublish\App_Data\Measurements\1302\师生关系量表描述文件.docx");
+           // doc.PasteFrom(@"D:\bspublish\App_Data\Measurements\1302\师生关系量表描述文件.docx");
             List<ChartSubArea> chartAreas = new List<ChartSubArea>();
             chartAreas.Add(new ChartSubArea() { Color = SchemeColorValues.Accent1, Label = "1st Qtr", Value = "8.2" });
             chartAreas.Add(new ChartSubArea() { Color = SchemeColorValues.Accent2, Label = "2st Qtr", Value = "3.2" });
             chartAreas.Add(new ChartSubArea() { Color = SchemeColorValues.Accent3, Label = "3st Qtr", Value = "1.4" });
             chartAreas.Add(new ChartSubArea() { Color = SchemeColorValues.Accent4, Label = "4st Qtr", Value = "1.2" });
-            var chart1=doc.AddChart("chart1");
-            chart1.AddNewBarAndLineChart(chartAreas,10,5);
+            //var chart1=doc.AddChart("chart1","rId12");
+            //chart1.AddNewBarAndLineChart(chartAreas,10,5);
             doc.AddBlackPage();
 
-            doc.PasteFrom(@"D:\bspublish\App_Data\Tasks\2017060301001\20170601系统描述文件.docx");
+           // doc.PasteFrom(@"D:\bspublish\App_Data\Tasks\2017060301001\20170601系统描述文件.docx");
             doc.Close();
 
 

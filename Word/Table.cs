@@ -250,10 +250,10 @@ namespace Word
         public void MergeCell(int row, int column, int mergerow, int mergecolumn)
         {
             int tem_row = 1;
-            int tem_column = 1;
-            bool begin = false;
+            int tem_column = 1;            
             if (row == mergerow)
             {
+                bool begin = false;
                 foreach (var tableRow in table)
                 {
                     if (tableRow.LocalName == "tr")
@@ -307,6 +307,8 @@ namespace Word
 
             if (row != mergerow)
             {
+                bool begin = false;
+                bool rowbegin = true;
                 foreach (var tableRow in table)
                 {
                     if (tableRow.LocalName == "tr")
@@ -315,7 +317,7 @@ namespace Word
                         {
                             return;
                         }
-                        if (row == tem_row)
+                        if (row == tem_row&&rowbegin)
                         {
                             tem_column = 1;
                             foreach (var cell in tableRow)
@@ -358,9 +360,10 @@ namespace Word
                                     tem_column++;
                                 }
                             }
+                            rowbegin = false;
 
                         }
-                        else
+                        if(row<tem_row&&!rowbegin)
                         {
                             tem_column = 1;
                             begin = false;
