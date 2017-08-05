@@ -118,28 +118,10 @@ namespace Word.tableModel
             runProperties1.Append(fontSize2);
             runProperties1.Append(fontSizeComplexScript2);
             Text text1 = new Text();
-            text1.Text = "心理";
+            text1.Text = "心理健康量表";
 
             run1.Append(runProperties1);
             run1.Append(text1);
-
-            Run run2 = new Run();
-
-            RunProperties runProperties2 = new RunProperties();
-            Bold bold3 = new Bold();
-            Kern kern3 = new Kern() { Val = (UInt32Value)0U };
-            FontSize fontSize3 = new FontSize() { Val = "24" };
-            FontSizeComplexScript fontSizeComplexScript3 = new FontSizeComplexScript() { Val = "20" };
-
-            runProperties2.Append(bold3);
-            runProperties2.Append(kern3);
-            runProperties2.Append(fontSize3);
-            runProperties2.Append(fontSizeComplexScript3);
-            Text text2 = new Text();
-            text2.Text = "健康量表";
-
-            run2.Append(runProperties2);
-            run2.Append(text2);
 
             Run run3 = new Run() { RsidRunProperties = "00D061CC" };
 
