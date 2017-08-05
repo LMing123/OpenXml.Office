@@ -178,6 +178,10 @@ namespace Test
                     }
                 }
             }
+
+            doc.Addtable2();
+            doc.Addtable3();
+            doc.Addtable5();
             doc.Close();
 
 

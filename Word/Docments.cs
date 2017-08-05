@@ -13,7 +13,7 @@ using System.Xml;
 using d = DocumentFormat.OpenXml.Drawing;
 using dc = DocumentFormat.OpenXml.Drawing.Charts;
 using dw = DocumentFormat.OpenXml.Drawing.Wordprocessing;
-
+using Word.tableModel;
 namespace Word
 {
     public class Docments
@@ -200,6 +200,24 @@ namespace Word
             return new Chart(chartPart);
         }
 
+        public void Addtable2()
+        {
+            GeneratedClass gc = new GeneratedClass();
+
+            body.AppendChild(gc.GenerateTable2());
+        }
+        public void Addtable3()
+        {
+            GeneratedClass gc = new GeneratedClass();
+
+            body.AppendChild(gc.GenerateTable3());
+        }
+        public void Addtable5()
+        {
+            GeneratedClass gc = new GeneratedClass();
+
+            body.AppendChild(gc.GenerateTable5());
+        }
 
         public void AddStyle()
         {
