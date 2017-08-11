@@ -62,6 +62,7 @@
     <Compile Include="Table.cs" />
     <Compile Include="tableModel\table2.cs" />
     <Compile Include="tableModel\table3.cs" />
+    <Compile Include="tableModel\table4.cs" />
     <Compile Include="tableModel\table5.cs" />
   </ItemGroup>
   <ItemGroup>

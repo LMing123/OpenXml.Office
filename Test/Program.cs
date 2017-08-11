@@ -181,6 +181,8 @@ namespace Test
 
             doc.Addtable2();
             doc.Addtable3();
+            doc.Addtable4();
+            doc.AddBlankLine(1);
             doc.Addtable5();
             doc.Close();
 

@@ -942,8 +942,6 @@ namespace Word.tableModel
                 count++;
             }
 
-           
-
             return table1;
 
         }

@@ -212,6 +212,12 @@ namespace Word
 
             body.AppendChild(gc.GenerateTable3());
         }
+        public void Addtable4()
+        {
+            GeneratedClass gc = new GeneratedClass();
+            body.AppendChild(gc.GenerateTable4());
+        }
+
         public void Addtable5()
         {
             GeneratedClass gc = new GeneratedClass();
