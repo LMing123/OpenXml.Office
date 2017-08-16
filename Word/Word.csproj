@@ -52,6 +52,7 @@
     <Compile Include="ChartSubArea.cs" />
     <Compile Include="CreateAndAddParagraphStyle.cs" />
     <Compile Include="Docments.cs" />
+    <Compile Include="Enum\eInfluence.cs" />
     <Compile Include="Enum\HighlightColor.cs" />
     <Compile Include="Enum\JustificationValues.cs" />
     <Compile Include="Enum\ShadingPatternValues.cs" />

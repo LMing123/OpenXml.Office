@@ -8,9 +8,10 @@ namespace Word.tableModel
 {
     using DocumentFormat.OpenXml.Wordprocessing;
     using DocumentFormat.OpenXml;
+    using Word.Enum;
     public partial class GeneratedClass
     {
-        public Table GenerateTable3()
+        public Table GenerateTable3(Dictionary<string, Dictionary<string, ValueTuple<string, string, eInfluence>>> content)
         {
             Table table1 = new Table();
 

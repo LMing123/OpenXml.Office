@@ -8,11 +8,12 @@ namespace Word.tableModel
 {
     using DocumentFormat.OpenXml.Wordprocessing;
     using DocumentFormat.OpenXml;
+    using Word.Enum;
 
     public partial class GeneratedClass
     {
         // Creates an Table instance and adds its children.
-        public Table GenerateTable2()
+        public Table GenerateTable2(string title,string evaluate,Dictionary<string, ValueTuple<string, string, eInfluence>> contents)
         {
             Table table1 = new Table();
 
@@ -122,7 +123,7 @@ namespace Word.tableModel
             runProperties1.Append(fontSize2);
             runProperties1.Append(fontSizeComplexScript2);
             Text text1 = new Text();
-            text1.Text = "师生关系";//表名
+            text1.Text =title;//表名
 
             run1.Append(runProperties1);
             run1.Append(text1);
@@ -243,7 +244,7 @@ namespace Word.tableModel
             runProperties35.Append(fontSize6);
             runProperties35.Append(fontSizeComplexScript6);
             Text text5 = new Text();//总评语
-            text5.Text = "该生的师生关系类型是矛盾冲突型，属于消极型师生关系。该生与教师交往中会有冲突和回避，在思想和行为上与教师有较明显的冲突，与教师之间的依赖和亲密感较低；不信任教师，怀疑教师的决定，遇到困难时，也不寻求教师的帮助，师生关系紧张、消极。师生关系是该生学业成绩的消极影响因素。";
+            text5.Text =evaluate;
 
             run35.Append(runProperties35);
             run35.Append(text5);
@@ -263,7 +264,7 @@ namespace Word.tableModel
             table1.Append(tableRow1);
             table1.Append(tableRow2);
 
-            for (int i = 0; i < 2; i++)
+            foreach (var content in contents)
             {
 
                 TableRow tableRow3 = new TableRow() { RsidTableRowMarkRevision = "00324142", RsidTableRowAddition = "00B97AF7", RsidTableRowProperties = "00B97AF7" };
@@ -326,7 +327,7 @@ namespace Word.tableModel
                 runProperties60.Append(boldComplexScript32);
                 runProperties60.Append(fontSize35);
                 Text text29 = new Text();
-                text29.Text = "冲突性";
+                text29.Text = content.Key;
 
                 run60.Append(runProperties60);
                 run60.Append(text29);
