@@ -123,7 +123,7 @@ namespace Word.tableModel
             runProperties1.Append(fontSize2);
             runProperties1.Append(fontSizeComplexScript2);
             Text text1 = new Text();
-            text1.Text =title;//表名
+            text1.Text =title;//TODO 量表名称
 
             run1.Append(runProperties1);
             run1.Append(text1);
@@ -244,7 +244,7 @@ namespace Word.tableModel
             runProperties35.Append(fontSize6);
             runProperties35.Append(fontSizeComplexScript6);
             Text text5 = new Text();//总评语
-            text5.Text =evaluate;
+            text5.Text =evaluate;//TODO 量表评价
 
             run35.Append(runProperties35);
             run35.Append(text5);
@@ -327,7 +327,7 @@ namespace Word.tableModel
                 runProperties60.Append(boldComplexScript32);
                 runProperties60.Append(fontSize35);
                 Text text29 = new Text();
-                text29.Text = content.Key;
+                text29.Text = content.Key;//TODO 维度
 
                 run60.Append(runProperties60);
                 run60.Append(text29);
@@ -644,7 +644,7 @@ namespace Word.tableModel
                 runProperties66.Append(fontSize46);
                 runProperties66.Append(fontSizeComplexScript42);
                 Text text35 = new Text();
-                text35.Text = "82.89";//得分
+                text35.Text = "82.89";//TODO 得分
 
                 run66.Append(runProperties66);
                 run66.Append(text35);
@@ -710,7 +710,7 @@ namespace Word.tableModel
                 runProperties67.Append(fontSize48);
                 runProperties67.Append(fontSizeComplexScript44);
                 Text text36 = new Text();
-                text36.Text = "高水平";
+                text36.Text = "高水平";//TODO 水平
 
                 run67.Append(runProperties67);
                 run67.Append(text36);
@@ -765,7 +765,26 @@ namespace Word.tableModel
                 paragraphProperties14.Append(justification10);
                 paragraphProperties14.Append(paragraphMarkRunProperties14);
 
+                Run run_affect = new Run();
+
+                RunProperties runProperties_affect = new RunProperties();
+                RunFonts runFonts_affect = new RunFonts() { Hint = FontTypeHintValues.EastAsia };
+                BoldComplexScript boldComplexScript_affect = new BoldComplexScript();
+                FontSize fontSize_affect = new FontSize() { Val = "22" };
+                FontSizeComplexScript fontSizeComplexScript_affect = new FontSizeComplexScript() { Val = "28" };
+
+                runProperties67.Append(runFonts50);
+                runProperties67.Append(boldComplexScript45);
+                runProperties67.Append(fontSize48);
+                runProperties67.Append(fontSizeComplexScript44);
+                Text text_affect = new Text();
+                text36.Text = " ";//TODO 影响
+
+                run_affect.Append(runProperties67);
+                run_affect.Append(text36);
+
                 paragraph14.Append(paragraphProperties14);
+                paragraph14.Append(run_affect);
 
                 tableCell10.Append(tableCellProperties10);
                 tableCell10.Append(paragraph14);
@@ -933,6 +952,7 @@ namespace Word.tableModel
                 runProperties99.Append(fontSize53);
                 runProperties99.Append(fontSizeComplexScript48);
                 Text text39 = new Text();
+                //TODO 维度评价
                 text39.Text = "该生在冲突性上得分为高水平，说明该生与教师之间缺少情感协调，容易产生摩擦；学生由于被迫屈服于教师权威或受到教师的误解而引起了心理上的不满，容易触发愤怒等消极情绪，导致学生退缩，出现如孤独、消极的学习态度。在遇到问题时，教师也不愿意找学生家长解决问题。";
 
                 run99.Append(runProperties99);
