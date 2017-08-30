@@ -181,8 +181,11 @@ namespace Test
             }
             var detaildata1 = new SafeDictionary<string,(string,string,Word.Enum.eInfluence,double)>();
             detaildata1.Add("test_demension", ("test1", "test2", Word.Enum.eInfluence.Bad,2.1));
+            detaildata1.Add("test_demension2", ("test1", "test2", Word.Enum.eInfluence.Bad, 2.1));
             doc.Addtable2("testtitle","test_evaluate", detaildata1);
+            doc.AddBlankLine(1);
             doc.Addtable3("testtitle", "test_evaluate", detaildata1);
+            doc.AddBlankLine(1);
             doc.Addtable4("testtitle", "test_evaluate", detaildata1);
             doc.AddBlankLine(1);
             doc.Addtable5("testtitle", "test_evaluate", detaildata1);
