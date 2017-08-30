@@ -706,7 +706,7 @@ namespace Word.tableModel
                 FontSize fontSize48 = new FontSize() { Val = "22" };
                 FontSizeComplexScript fontSizeComplexScript44 = new FontSizeComplexScript() { Val = "28" };
 
-                runProperties67.Append(runFonts50);
+                runProperties67.Append(runFonts50.CloneNode(true));
                 runProperties67.Append(boldComplexScript45);
                 runProperties67.Append(fontSize48);
                 runProperties67.Append(fontSizeComplexScript44);
@@ -774,15 +774,15 @@ namespace Word.tableModel
                 FontSize fontSize_affect = new FontSize() { Val = "22" };
                 FontSizeComplexScript fontSizeComplexScript_affect = new FontSizeComplexScript() { Val = "28" };
 
-                runProperties67.Append(runFonts50);
-                runProperties67.Append(boldComplexScript45);
-                runProperties67.Append(fontSize48);
-                runProperties67.Append(fontSizeComplexScript44);
+                runProperties67.Append((RunFonts)runFonts50.Clone());
+                runProperties67.Append((BoldComplexScript)boldComplexScript45.Clone());
+                runProperties67.Append((FontSize)fontSize48.Clone());
+                runProperties67.Append((FontSizeComplexScript)fontSizeComplexScript44.Clone());
                 Text text_affect = new Text();
                 text36.Text = content.Value.Item3.ToString();//TODO 影响
 
-                run_affect.Append(runProperties67);
-                run_affect.Append(text36);
+                run_affect.Append((RunProperties)runProperties67.Clone());
+                run_affect.Append((Text)text36.Clone());
 
                 paragraph14.Append(paragraphProperties14);
                 paragraph14.Append(run_affect);

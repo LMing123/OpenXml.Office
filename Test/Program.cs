@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Drawing;
+using Lsj.Util.Collections;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -178,12 +179,13 @@ namespace Test
                     }
                 }
             }
-
-            doc.Addtable2();
-            doc.Addtable3();
-            doc.Addtable4();
+            var detaildata1 = new SafeDictionary<string,(string,string,Word.Enum.eInfluence,double)>();
+            detaildata1.Add("test_demension", ("test1", "test2", Word.Enum.eInfluence.Bad,2.1));
+            doc.Addtable2("testtitle","test_evaluate", detaildata1);
+            doc.Addtable3("testtitle", "test_evaluate", detaildata1);
+            doc.Addtable4("testtitle", "test_evaluate", detaildata1);
             doc.AddBlankLine(1);
-            doc.Addtable5();
+            doc.Addtable5("testtitle", "test_evaluate", detaildata1);
             doc.Close();
 
 
