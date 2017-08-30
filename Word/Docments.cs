@@ -23,6 +23,7 @@ namespace Word
     {
         WordprocessingDocument doc;
         MainDocumentPart mainPart;
+        
         Body body;
 
         public Docments(string path)
