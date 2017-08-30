@@ -9,9 +9,11 @@ namespace Word.tableModel
     using DocumentFormat.OpenXml.Wordprocessing;
     using DocumentFormat.OpenXml;
     using Word.Enum;
+    using Lsj.Util.Collections;
+
     public partial class GeneratedClass
     {
-        public Table GenerateTable3(Dictionary<string, Dictionary<string, ValueTuple<string, string, eInfluence>>> content)
+        public Table GenerateTable3(string title, string evaluate, SafeDictionary<string, (string, string, eInfluence, double)> contents)
         {
             Table table1 = new Table();
 
@@ -121,14 +123,10 @@ namespace Word.tableModel
             runProperties1.Append(fontSize2);
             runProperties1.Append(fontSizeComplexScript2);
             Text text1 = new Text();
-            text1.Text = "班级环境量表";
+            text1.Text = title;//TODO 量表名称
 
             run1.Append(runProperties1);
-            run1.Append(text1);
-
-           
-
-          
+            run1.Append(text1);           
 
             Run run4 = new Run() { RsidRunProperties = "00E54493", RsidRunAddition = "00E54493" };
 
@@ -480,7 +478,7 @@ namespace Word.tableModel
             table1.Append(tableRow2);
 
             int count = 1;
-            for(int i=1;i<3;i++)
+            foreach(var content in contents)
             {
                 TableRow tableRow3 = new TableRow() { RsidTableRowMarkRevision = "007642DC", RsidTableRowAddition = "00B97AF7", RsidTableRowProperties = "00E9225D" };
 
@@ -542,7 +540,7 @@ namespace Word.tableModel
                 runProperties13.Append(fontSize20);
                 runProperties13.Append(fontSizeComplexScript20);
                 Text text13 = new Text();
-                text13.Text = "师生关系";
+                text13.Text = content.Key;//TODO 维度名称
 
                 run13.Append(runProperties13);
                 run13.Append(text13);
@@ -576,7 +574,7 @@ namespace Word.tableModel
 
                 runProperties15.Append(runFonts22);
                 Text text15 = new Text();
-                text15.Text = "34.44";
+                text15.Text = content.Value.Item4.ToString();//TODO 得分
 
                 run15.Append(runProperties15);
                 run15.Append(text15);
@@ -634,7 +632,7 @@ namespace Word.tableModel
                 runProperties43.Append(fontSize24);
                 runProperties43.Append(fontSizeComplexScript24);
                 Text text16 = new Text();
-                text16.Text = "低水平";
+                text16.Text = content.Value.Item2; //TODO 水平
 
                 run45.Append(runProperties43);
                 run45.Append(text16);
@@ -728,7 +726,7 @@ namespace Word.tableModel
                 runProperties72.Append(fontSize29);
                 runProperties72.Append(fontSizeComplexScript29);
                 Text text17 = new Text();
-                text17.Text = "消极影响";
+                text17.Text = content.Value.Item3.ToString();//影响
 
                 run76.Append(runProperties72);
                 run76.Append(text17);
@@ -875,8 +873,7 @@ namespace Word.tableModel
                 runProperties105.Append(kern34);
                 runProperties105.Append(fontSizeComplexScript34);
                 Text text20 = new Text();
-                text20.Text = "该生认为其所在班级的类型是一般型，心理学研究发现：该类型班级学生的学业成绩明显高于其他两类班级的学生。该类型的班级人际关系较好，师生和同学之间有一定的支持与信任、宽容与互动；课堂秩序性较好；该生觉得教师布置的作业适当，适度的课业负担转化为了该生学习的动力。";
-
+                text20.Text = evaluate;//TODO 量表评价
                 run109.Append(runProperties105);
                 run109.Append(text20);
 

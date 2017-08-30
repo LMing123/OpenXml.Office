@@ -9,11 +9,12 @@ namespace Word.tableModel
     using DocumentFormat.OpenXml.Wordprocessing;
     using DocumentFormat.OpenXml;
     using Word.Enum;
+    using Lsj.Util.Collections;
 
     public partial class GeneratedClass
     {
         // Creates an Table instance and adds its children.
-        public Table GenerateTable2(string title,string evaluate,Dictionary<string, ValueTuple<string, string, eInfluence>> contents)
+        public Table GenerateTable2(string title, string evaluate, SafeDictionary<string, (string, string, eInfluence, double)> contents)
         {
             Table table1 = new Table();
 
@@ -644,7 +645,7 @@ namespace Word.tableModel
                 runProperties66.Append(fontSize46);
                 runProperties66.Append(fontSizeComplexScript42);
                 Text text35 = new Text();
-                text35.Text = "82.89";//TODO 得分
+                text35.Text = content.Value.Item4.ToString();//TODO 得分
 
                 run66.Append(runProperties66);
                 run66.Append(text35);
@@ -710,7 +711,7 @@ namespace Word.tableModel
                 runProperties67.Append(fontSize48);
                 runProperties67.Append(fontSizeComplexScript44);
                 Text text36 = new Text();
-                text36.Text = "高水平";//TODO 水平
+                text36.Text =content.Value.Item2;//TODO 水平
 
                 run67.Append(runProperties67);
                 run67.Append(text36);
@@ -778,7 +779,7 @@ namespace Word.tableModel
                 runProperties67.Append(fontSize48);
                 runProperties67.Append(fontSizeComplexScript44);
                 Text text_affect = new Text();
-                text36.Text = " ";//TODO 影响
+                text36.Text = content.Value.Item3.ToString();//TODO 影响
 
                 run_affect.Append(runProperties67);
                 run_affect.Append(text36);
@@ -953,8 +954,7 @@ namespace Word.tableModel
                 runProperties99.Append(fontSizeComplexScript48);
                 Text text39 = new Text();
                 //TODO 维度评价
-                text39.Text = "该生在冲突性上得分为高水平，说明该生与教师之间缺少情感协调，容易产生摩擦；学生由于被迫屈服于教师权威或受到教师的误解而引起了心理上的不满，容易触发愤怒等消极情绪，导致学生退缩，出现如孤独、消极的学习态度。在遇到问题时，教师也不愿意找学生家长解决问题。";
-
+                text39.Text = content.Value.Item1;
                 run99.Append(runProperties99);
                 run99.Append(text39);
 

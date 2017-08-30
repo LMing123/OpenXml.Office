@@ -14,6 +14,9 @@ using d = DocumentFormat.OpenXml.Drawing;
 using dc = DocumentFormat.OpenXml.Drawing.Charts;
 using dw = DocumentFormat.OpenXml.Drawing.Wordprocessing;
 using Word.tableModel;
+using Word.Enum;
+using Lsj.Util.Collections;
+
 namespace Word
 {
     public class Docments
@@ -200,29 +203,29 @@ namespace Word
             return new Chart(chartPart);
         }
 
-        public void Addtable2()
+        public void Addtable2(string title,string evaluate,SafeDictionary<string, (string, string, eInfluence, double)> content)
         {
             GeneratedClass gc = new GeneratedClass();
 
-            body.AppendChild(gc.GenerateTable2());
+            body.AppendChild(gc.GenerateTable2(title, evaluate,content));
         }
-        public void Addtable3()
+        public void Addtable3(string title, string evaluate, SafeDictionary<string, (string, string, eInfluence, double)> content)
         {
             GeneratedClass gc = new GeneratedClass();
 
-            body.AppendChild(gc.GenerateTable3());
+            body.AppendChild(gc.GenerateTable3(title, evaluate, content));
         }
-        public void Addtable4()
+        public void Addtable4(string title, string evaluate, SafeDictionary<string, (string, string, eInfluence, double)> content)
         {
             GeneratedClass gc = new GeneratedClass();
-            body.AppendChild(gc.GenerateTable4());
+            body.AppendChild(gc.GenerateTable4(title, evaluate, content));
         }
 
-        public void Addtable5()
+        public void Addtable5(string title, string evaluate, SafeDictionary<string, (string, string, eInfluence, double)> content)
         {
             GeneratedClass gc = new GeneratedClass();
 
-            body.AppendChild(gc.GenerateTable5());
+            body.AppendChild(gc.GenerateTable5(title, evaluate,content));
         }
 
         public void AddStyle()

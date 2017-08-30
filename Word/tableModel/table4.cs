@@ -9,10 +9,11 @@ namespace Word.tableModel
     using DocumentFormat.OpenXml.Wordprocessing;
     using DocumentFormat.OpenXml;
     using Word.Enum;
+    using Lsj.Util.Collections;
 
     public partial class GeneratedClass
     {
-        public Table GenerateTable4(Dictionary<string, Dictionary<string, ValueTuple<string, string, eInfluence>>> content)
+        public Table GenerateTable4(string title, string evaluate, SafeDictionary<string, (string, string, eInfluence, double)> contents)
         {
 
 
