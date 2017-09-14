@@ -203,7 +203,7 @@ namespace Word.tableModel
             runProperties4.Append(noProof2);
             runProperties4.Append(color2);
             Text text4 = new Text();
-            text4.Text = "【量表总的评价】";
+            text4.Text = "";
 
             run4.Append(runProperties4);
             run4.Append(text4);
@@ -911,7 +911,7 @@ namespace Word.tableModel
                 runProperties68.Append(noProof60);
                 runProperties68.Append(color4);
                 Text text37 = new Text();
-                text37.Text = "【维度评价】";
+                text37.Text = "";
 
                 run68.Append(runProperties68);
                 run68.Append(text37);

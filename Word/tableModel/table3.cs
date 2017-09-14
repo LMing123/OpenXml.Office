@@ -145,7 +145,7 @@ namespace Word.tableModel
             runProperties4.Append(fontSize5);
             runProperties4.Append(fontSizeComplexScript5);
             Text text4 = new Text();
-            text4.Text = "【量表名称】";
+            text4.Text = "";
 
             run4.Append(runProperties4);
             run4.Append(text4);
@@ -834,7 +834,7 @@ namespace Word.tableModel
                 runProperties74.Append(bold23);
                 runProperties74.Append(color8);
                 Text text18 = new Text();
-                text18.Text = "【量表评价】";
+                text18.Text = "";
 
                 run78.Append(runProperties74);
                 run78.Append(text18);

@@ -23,7 +23,7 @@ namespace Word
     {
         WordprocessingDocument doc;
         MainDocumentPart mainPart;
-        
+
         Body body;
 
         public Docments(string path)
@@ -67,6 +67,23 @@ namespace Word
             }
 
         }
+
+        public void DocReadOnly(bool readonlyFlag)
+        {
+            if (readonlyFlag)
+            {
+                if (doc.MainDocumentPart.DocumentSettingsPart == null)
+                {
+                    doc.MainDocumentPart.AddNewPart<DocumentSettingsPart>();
+
+                }
+                var setting = doc.MainDocumentPart.DocumentSettingsPart;
+                setting.Settings = new Settings();
+                setting.Settings.WriteProtection = new WriteProtection() { Hash = new Base64BinaryValue() { Value = "9oN7nWkCAyEZib1RomSJTjmPpCY=" } };
+            }
+
+        }
+
         public void AddParagraph()
         {
 
@@ -185,7 +202,7 @@ namespace Word
             dw.Inline inline = new dw.Inline();
             inline.Append(new dw.Extent() { Cx = 5274310L, Cy = 3076575L });
             inline.Append(new dw.EffectExtent() { LeftEdge = 0, TopEdge = 0, RightEdge = 2540, BottomEdge = 9525 });
-            dw.DocProperties docPros = new dw.DocProperties() { Id = 6666666, Name = chartName };
+            dw.DocProperties docPros = new dw.DocProperties() { Id = 6666, Name = chartName };
             inline.Append(docPros);
             inline.Append(new dw.NonVisualGraphicFrameDrawingProperties());
 
@@ -204,11 +221,18 @@ namespace Word
             return new Chart(chartPart);
         }
 
-        public void Addtable2(string title,string evaluate,SafeDictionary<string, (string, string, eInfluence, double)> content)
+        public void AddSummaryTable(SafeDictionary<string, SafeDictionary<string, (string, string, Word.Enum.eInfluence, double)>> content)
         {
             GeneratedClass gc = new GeneratedClass();
 
-            body.AppendChild(gc.GenerateTable2(title, evaluate,content));
+            body.AppendChild(gc.GenerateSummaryTable(content));
+        }
+
+        public void Addtable2(string title, string evaluate, SafeDictionary<string, (string, string, eInfluence, double)> content)
+        {
+            GeneratedClass gc = new GeneratedClass();
+
+            body.AppendChild(gc.GenerateTable2(title, evaluate, content));
         }
         public void Addtable3(string title, string evaluate, SafeDictionary<string, (string, string, eInfluence, double)> content)
         {
@@ -226,7 +250,7 @@ namespace Word
         {
             GeneratedClass gc = new GeneratedClass();
 
-            body.AppendChild(gc.GenerateTable5(title, evaluate,content));
+            body.AppendChild(gc.GenerateTable5(title, evaluate, content));
         }
 
         public void AddStyle()
