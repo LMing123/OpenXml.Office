@@ -83,6 +83,9 @@ namespace Test
             // doc.PasteFrom(@"D:\bspublish\App_Data\Tasks\2017060301001\20170601系统描述文件.docx");
             //量表，维度，评价 等级 影响 得分
             //量表<维度<评估，登记，影响>>
+
+
+
             var detaildata = new SafeDictionary<string, SafeDictionary<string, (string, string, Word.Enum.eInfluence, double)>>();
             var tem11 = new SafeDictionary<string, (string, string, Word.Enum.eInfluence, double)>();
             tem11.Add("冲突性", ("123", "差",Word.Enum.eInfluence.坏,56));

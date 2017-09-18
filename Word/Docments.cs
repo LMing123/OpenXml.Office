@@ -172,7 +172,19 @@ namespace Word
                         pic.FeedData(item.GetStream());
                     }
 
-                    body.Append(content.Select(t => t.CloneNode(true)));
+                    ///不知道为嘛冲突反正去了sectPr就好了~~
+                    ///下面那个是不取name为sectPr的
+                    //foreach (var nodes in content)
+                    //{
+                    //    if (nodes.LocalName=="sectPr")
+                    //    {
+                    //        nodes.Remove();
+                    //    }
+                    //}
+
+                    var openXmlElement=content.TakeWhile(n => n.LocalName != "sectPr");
+
+                    body.Append(openXmlElement.Select(t => t.CloneNode(true)));
                     copy_doc.Close();
                 }
 
