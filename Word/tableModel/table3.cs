@@ -564,9 +564,11 @@ namespace Word.tableModel
 
                 ParagraphProperties paragraphProperties8 = new ParagraphProperties();
                 Indentation indentation8 = new Indentation() { FirstLine = "0", FirstLineChars = 0 };
+                Justification justification_n1= new Justification() { Val = JustificationValues.Center };
 
                 paragraphProperties8.Append(indentation8);
-
+                paragraphProperties8.Append(justification_n1);
+             
                 Run run15 = new Run();
 
                 RunProperties runProperties15 = new RunProperties();
@@ -687,8 +689,15 @@ namespace Word.tableModel
 
                 TableCellProperties tableCellProperties10 = new TableCellProperties();
                 TableCellWidth tableCellWidth10 = new TableCellWidth() { Width = "1560", Type = TableWidthUnitValues.Dxa };
+           
+                Shading shading_10= new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "auto" };
+                TableCellVerticalAlignment tableCellVerticalAlignment_10= new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
 
                 tableCellProperties10.Append(tableCellWidth10);
+                tableCellProperties10.Append(shading_10);
+                tableCellProperties10.Append(tableCellVerticalAlignment_10);
+
 
                 Paragraph paragraph13 = new Paragraph() { RsidParagraphMarkRevision = "001F26F7", RsidParagraphAddition = "00B97AF7", RsidParagraphProperties = "00B97AF7", RsidRunAdditionDefault = "00B97AF7" };
 
@@ -734,54 +743,8 @@ namespace Word.tableModel
                 paragraph13.Append(paragraphProperties13);
                 paragraph13.Append(run76);
 
-                Paragraph paragraph14 = new Paragraph() { RsidParagraphMarkRevision = "007642DC", RsidParagraphAddition = "00B97AF7", RsidParagraphProperties = "00B97AF7", RsidRunAdditionDefault = "00F82954" };
-
-                ParagraphProperties paragraphProperties14 = new ParagraphProperties();
-                Indentation indentation14 = new Indentation() { FirstLine = "0", FirstLineChars = 0 };
-                Justification justification11 = new Justification() { Val = JustificationValues.Center };
-
-                ParagraphMarkRunProperties paragraphMarkRunProperties13 = new ParagraphMarkRunProperties();
-                RunFonts runFonts83 = new RunFonts() { Ascii = "宋体", HighAnsi = "宋体", ComplexScript = "Tahoma" };
-                Color color6 = new Color() { Val = "000000" };
-                Kern kern30 = new Kern() { Val = (UInt32Value)0U };
-                FontSize fontSize30 = new FontSize() { Val = "24" };
-                FontSizeComplexScript fontSizeComplexScript30 = new FontSizeComplexScript() { Val = "24" };
-
-                paragraphMarkRunProperties13.Append(runFonts83);
-                paragraphMarkRunProperties13.Append(color6);
-                paragraphMarkRunProperties13.Append(kern30);
-                paragraphMarkRunProperties13.Append(fontSize30);
-                paragraphMarkRunProperties13.Append(fontSizeComplexScript30);
-
-                paragraphProperties14.Append(indentation14);
-                paragraphProperties14.Append(justification11);
-                paragraphProperties14.Append(paragraphMarkRunProperties13);
-
-                Run run77 = new Run();
-
-                RunProperties runProperties73 = new RunProperties();
-                RunFonts runFonts84 = new RunFonts() { Ascii = "宋体", HighAnsi = "宋体", ComplexScript = "Tahoma" };
-                Color color7 = new Color() { Val = "000000" };
-                Kern kern31 = new Kern() { Val = (UInt32Value)0U };
-                FontSize fontSize31 = new FontSize() { Val = "24" };
-                FontSizeComplexScript fontSizeComplexScript31 = new FontSizeComplexScript() { Val = "24" };
-
-                runProperties73.Append(runFonts84);
-                runProperties73.Append(color7);
-                runProperties73.Append(kern31);
-                runProperties73.Append(fontSize31);
-                runProperties73.Append(fontSizeComplexScript31);
-                FieldChar fieldChar6 = new FieldChar() { FieldCharType = FieldCharValues.End };
-
-                run77.Append(runProperties73);
-                run77.Append(fieldChar6);
-
-                paragraph14.Append(paragraphProperties14);
-                paragraph14.Append(run77);
-
                 tableCell10.Append(tableCellProperties10);
                 tableCell10.Append(paragraph13);
-                tableCell10.Append(paragraph14);
 
                 TableCell tableCell11 = new TableCell();
 

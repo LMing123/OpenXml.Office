@@ -34,7 +34,7 @@
   <ItemGroup>
     <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17" />
     <Reference Include="Lsj.Util, Version=1.0.3.0, Culture=neutral, PublicKeyToken=0f183bc795c57a20, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lsj.Util.1.0.3\lib\net40\Lsj.Util.dll</HintPath>
+      <HintPath>..\packages\Lsj.Util.1.0.4\lib\net40\Lsj.Util.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

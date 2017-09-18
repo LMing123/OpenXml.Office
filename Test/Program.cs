@@ -24,7 +24,7 @@ namespace Test
         static void Main(string[] args)
         {
             Docments doc = new Docments(@"C:\Users\Zhang\Documents\test_word.docx");
-            doc.DocReadOnly(true);
+            doc.DocReadOnly(false);
             // doc.AddStyle();
             // doc.AddStylesPartToPackage();
             //  doc.CreateParagraphStyle(ParagraphStyle.Heading1.ToString(), ParagraphStyle.Heading1.ToString());

@@ -731,7 +731,8 @@ namespace Word.tableModel
                 paragraphProperties11.Append(justification11);
                 paragraphProperties11.Append(paragraphMarkRunProperties11);
 
-                Run run11 = new Run() { RsidRunProperties = "001B2170" };
+                //  Run run11 = new Run() { RsidRunProperties = "001B2170" };
+                Run run11 = new Run();
 
                 RunProperties runProperties11 = new RunProperties();
                 RunFonts runFonts21 = new RunFonts() { Hint = FontTypeHintValues.EastAsia, Ascii = "Tahoma", HighAnsi = "Tahoma", ComplexScript = "Tahoma" };
