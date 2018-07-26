@@ -751,7 +751,7 @@ namespace Word.tableModel
                 runProperties41.Append(fontSize48);
                 runProperties41.Append(fontSizeComplexScript48);
                 Text text12 = new Text();
-                text12.Text = measurement.Value.FirstOrDefault().Value.Item3==eInfluence.坏?"■":"";//TODO第一行是否需要改善
+                text12.Text = measurement.Value.FirstOrDefault().Value.Item3== eInfluence.消极影响?"■":"";//TODO第一行是否需要改善
 
                 run41.Append(runProperties41);
                 run41.Append(text12);
@@ -1181,7 +1181,7 @@ namespace Word.tableModel
                     runProperties76.Append(fontSize87);
                     runProperties76.Append(fontSizeComplexScript87);
                     Text text17 = new Text();
-                    text17.Text = demension.Value.Item3==eInfluence.坏?"■":"";
+                    text17.Text = demension.Value.Item3== eInfluence.消极影响?"■":"";
 
                     run76.Append(runProperties76);
                     run76.Append(text17);

@@ -174,17 +174,31 @@ namespace Word
 
                     ///不知道为嘛冲突反正去了sectPr就好了~~
                     ///下面那个是不取name为sectPr的
-                    //foreach (var nodes in content)
-                    //{
-                    //    if (nodes.LocalName=="sectPr")
-                    //    {
-                    //        nodes.Remove();
-                    //    }
-                    //}
+                    for(int i=0;i<content.Count();i++)
+                    {
+                        if (content.ElementAt(i).LocalName == "p")
+                        {
+                            for (int j = 0; j < content.ElementAt(i).Count(); j++)
+                            {
+                                if (content.ElementAt(i).ElementAt(j).LocalName == "bookmarkStart" || content.ElementAt(i).ElementAt(j).LocalName == "bookmarkEnd")
+                                {
+                                    content.ElementAt(i).ElementAt(j).Remove();
+                                }
+                            }
+                        }
+                    }
+                    for (int i = 0; i < content.Count(); i++)
+                    {
+                        if (content.ElementAt(i).LocalName == "sectPr" || content.ElementAt(i).LocalName == "bookmarkStart" || content.ElementAt(i).LocalName == "bookmarkEnd")
+                        {
+                            content.ElementAt(i).Remove();
+                        }
 
-                    var openXmlElement=content.TakeWhile(n => n.LocalName != "sectPr");
+                    }
+                    // var openXmlElement = content.Where(n => n.LocalName == "p");
 
-                    body.Append(openXmlElement.Select(t => t.CloneNode(true)));
+
+                    body.Append(content.Select(t => t.CloneNode(true)));
                     copy_doc.Close();
                 }
 

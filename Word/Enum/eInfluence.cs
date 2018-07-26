@@ -9,8 +9,8 @@ namespace Word.Enum
 {
     public enum eInfluence
     {
-        坏,
-        无,
-        好
+        消极影响,
+        无明显影响,
+        积极影响
     }
 }
