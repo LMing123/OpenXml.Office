@@ -24,7 +24,7 @@ namespace Word
             this.chartPart = chartpart;
         }
 
-        public void AddNewBarAndLineChart(List<ChartSubArea> barChartList,double top, double bottom)
+        public void AddNewBarAndLineChart(string charttitle,List<ChartSubArea> barChartList,double top, double bottom)
         {
 
             ChartSpace chartSpace1 = new ChartSpace();
@@ -57,6 +57,57 @@ namespace Word
             C.Chart chart1 = new C.Chart();
 
             C.Title title1 = new C.Title();
+            C.ChartText chartText1 = new C.ChartText();
+
+            C.RichText richText1 = new C.RichText();
+            A.BodyProperties bodyProperties66 = new A.BodyProperties() { Rotation = 0, UseParagraphSpacing = true, VerticalOverflow = A.TextVerticalOverflowValues.Ellipsis, Vertical = A.TextVerticalValues.Horizontal, Wrap = A.TextWrappingValues.Square, Anchor = A.TextAnchoringTypeValues.Center, AnchorCenter = true };
+            A.ListStyle listStyle66 = new A.ListStyle();
+
+            A.Paragraph paragraph66 = new A.Paragraph();
+
+            A.ParagraphProperties paragraphProperties66 = new A.ParagraphProperties();
+
+            A.DefaultRunProperties defaultRunProperties66 = new A.DefaultRunProperties() { FontSize = 1400, Bold = false, Italic = false, Underline = A.TextUnderlineValues.None, Strike = A.TextStrikeValues.NoStrike, Kerning = 1200, Spacing = 0, Baseline = 0 };
+
+            A.SolidFill solidFill766 = new A.SolidFill();
+
+            A.SchemeColor schemeColor1666 = new A.SchemeColor() { Val = A.SchemeColorValues.Text1 };
+            A.LuminanceModulation luminanceModulation966 = new A.LuminanceModulation() { Val = 65000 };
+            A.LuminanceOffset luminanceOffset166 = new A.LuminanceOffset() { Val = 35000 };
+
+            schemeColor1666.Append(luminanceModulation966);
+            schemeColor1666.Append(luminanceOffset166);
+
+            solidFill766.Append(schemeColor1666);
+            A.LatinFont latinFont366 = new A.LatinFont() { Typeface = "+mn-lt" };
+            A.EastAsianFont eastAsianFont366 = new A.EastAsianFont() { Typeface = "+mn-ea" };
+            A.ComplexScriptFont complexScriptFont366 = new A.ComplexScriptFont() { Typeface = "+mn-cs" };
+
+            defaultRunProperties66.Append(solidFill766);
+            defaultRunProperties66.Append(latinFont366);
+            defaultRunProperties66.Append(eastAsianFont366);
+            defaultRunProperties66.Append(complexScriptFont366);
+
+            paragraphProperties66.Append(defaultRunProperties66);
+
+            A.Run run1 = new A.Run();
+            A.RunProperties runProperties1 = new A.RunProperties() { Language = "zh-CN", AlternativeLanguage = "en-US" };
+            A.Text text1 = new A.Text();
+            text1.Text = charttitle;
+
+            run1.Append(runProperties1);
+            run1.Append(text1);
+            A.EndParagraphRunProperties endParagraphRunProperties166 = new A.EndParagraphRunProperties() { Language = "en-US", AlternativeLanguage = "zh-CN" };
+
+            paragraph66.Append(paragraphProperties66);
+            paragraph66.Append(run1);
+            paragraph66.Append(endParagraphRunProperties166);
+
+            richText1.Append(bodyProperties66);
+            richText1.Append(listStyle66);
+            richText1.Append(paragraph66);
+
+            chartText1.Append(richText1);
             C.Overlay overlay1 = new C.Overlay() { Val = false };
 
             C.ChartShapeProperties chartShapeProperties1 = new C.ChartShapeProperties();
@@ -102,7 +153,8 @@ namespace Word
             defaultRunProperties1.Append(complexScriptFont3);
 
             paragraphProperties1.Append(defaultRunProperties1);
-            A.EndParagraphRunProperties endParagraphRunProperties1 = new A.EndParagraphRunProperties() { Language = "zh-CN" };
+
+            A.EndParagraphRunProperties endParagraphRunProperties1 = new A.EndParagraphRunProperties() { Language = "en-US", AlternativeLanguage = "zh-CN" };
 
             paragraph1.Append(paragraphProperties1);
             paragraph1.Append(endParagraphRunProperties1);
@@ -111,6 +163,7 @@ namespace Word
             textProperties1.Append(listStyle1);
             textProperties1.Append(paragraph1);
 
+            title1.Append(chartText1);
             title1.Append(overlay1);
             title1.Append(chartShapeProperties1);
             title1.Append(textProperties1);
@@ -141,7 +194,7 @@ namespace Word
 
             C.StringPoint stringPoint1 = new C.StringPoint() { Index = (UInt32Value)0U };
             C.NumericValue numericValue1 = new C.NumericValue();
-            numericValue1.Text = "系列 1";
+            numericValue1.Text = "得分";
 
             stringPoint1.Append(numericValue1);
 
@@ -287,7 +340,7 @@ namespace Word
             C.PointCount pointCount4 = new C.PointCount() { Val = (UInt32Value)1U };
             C.StringPoint stringPoint6 = new C.StringPoint() { Index = (UInt32Value)0U };
             C.NumericValue numericValue10 = new C.NumericValue();
-            numericValue10.Text = "系列 2";
+            numericValue10.Text = "低分线";
             stringPoint6.Append(numericValue10);
             stringCache3.Append(pointCount4);
             stringCache3.Append(stringPoint6);
@@ -400,7 +453,7 @@ namespace Word
 
             C.StringPoint stringPoint11 = new C.StringPoint() { Index = (UInt32Value)0U };
             C.NumericValue numericValue19 = new C.NumericValue();
-            numericValue19.Text = "系列 3";
+            numericValue19.Text = "高分线";
 
             stringPoint11.Append(numericValue19);
 

@@ -63,7 +63,7 @@ namespace Word
         /// <param name="justificationValues">对齐方式</param>
         /// <param name="outlineLevel">大纲级别</param>        /// 
         /// <param name="paragraphStyle">段落风格</param>
-        public void SetParaFormat(int? firstLineChars = null, JustificationValues? justificationValues = null, int? outlineLevel = null, ParagraphStyle? paragraphStyle = null)
+        public void SetParaFormat(int? firstLineChars = null, JustificationValues? justificationValues = null, int? outlineLevel = null,double? linespace=null, ParagraphStyle? paragraphStyle = null)
         {
             formatCollection.ParagraphProperties = new ParagraphProperties();
             if (firstLineChars != null)
@@ -84,6 +84,10 @@ namespace Word
             {
                 formatCollection.ParagraphProperties.OutlineLevel = new OutlineLevel() { Val = outlineLevel };
 
+            }
+            if(linespace!=null)
+            {
+                formatCollection.ParagraphProperties.SpacingBetweenLines = new SpacingBetweenLines() { Line =( linespace * 240).ToString(), LineRule = LineSpacingRuleValues.Auto };
             }
           //  formatCollection.ParagraphProperties.Shading=new Shading() { }
 

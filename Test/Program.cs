@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Drawing;
+using Lsj.Util.Collections;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -23,6 +24,7 @@ namespace Test
         static void Main(string[] args)
         {
             Docments doc = new Docments(@"C:\Users\Zhang\Documents\test_word.docx");
+            doc.DocReadOnly(false);
             // doc.AddStyle();
             // doc.AddStylesPartToPackage();
             //  doc.CreateParagraphStyle(ParagraphStyle.Heading1.ToString(), ParagraphStyle.Heading1.ToString());
@@ -79,13 +81,17 @@ namespace Test
             // doc.AddBlackPage();
 
             // doc.PasteFrom(@"D:\bspublish\App_Data\Tasks\2017060301001\20170601系统描述文件.docx");
-
+            //量表，维度，评价 等级 影响 得分
             //量表<维度<评估，登记，影响>>
-            var detaildata = new Dictionary<string, Dictionary<string,  ValueTuple<string, string, eInfluence>>>();
-            var tem11 = new Dictionary<string, ValueTuple<string, string, eInfluence>>();
-            tem11.Add("冲突性", ("123", "差", eInfluence.Bad));
-            var tem2 = new Dictionary<string, ValueTuple<string, string, eInfluence>>();
-            tem2.Add("回避性", ("123", "差", eInfluence.Bad));
+
+
+
+            var detaildata = new SafeDictionary<string, SafeDictionary<string, (string, string, Word.Enum.eInfluence, double)>>();
+            var tem11 = new SafeDictionary<string, (string, string, Word.Enum.eInfluence, double)>();
+            tem11.Add("冲突性", ("123", "差",Word.Enum.eInfluence.坏,56));
+            tem11.Add("fuck", ("123", "差", Word.Enum.eInfluence.坏, 56));
+            var tem2 = new SafeDictionary<string, (string, string, Word.Enum.eInfluence, double)>();
+            tem2.Add("回避性", ("123", "差", Word.Enum.eInfluence.坏, 65));
             //var tem3 = new Dictionary<string, ValueTuple<string, string, eInfluence>>();
             //tem3.Add("亲密性", ("123", "差", eInfluence.Bad));
             //var tem4 = new Dictionary<string, ValueTuple<string, string, eInfluence>>();
@@ -97,88 +103,103 @@ namespace Test
 
             var DetailData = detaildata;
 
-            int rowNum = 1, colNum = 12;
-            foreach (var tem in DetailData)
-            {
-                rowNum = rowNum + tem.Value.Values.Count();
-            }
-            int maxRowNum = (rowNum / 2) + (rowNum % 2);
-            var table = doc.AddTable(maxRowNum, colNum);
+            doc.AddSummaryTable(detaildata);
+            #region
+            //int rowNum = 1, colNum = 12;
+            //foreach (var tem in DetailData)
+            //{
+            //    rowNum = rowNum + tem.Value.Values.Count();
+            //}
+            //int maxRowNum = (rowNum / 2) + (rowNum % 2);
+            //var table = doc.AddTable(maxRowNum, colNum);
 
-           // var table = doc.AddTable(3, 12);
-            //   table.AddTableBorder(Color.Red, Color.Red);
-            table.SetRowStyle(1, System.Drawing.Color.PaleVioletRed);
-            table.MergeCell(1, 7, 1, 10);
-            table.MergeCell(1, 1, 1, 4);
-            table.SetCellStyle(1, 4, bold: true);
-            table.SetCellStyle(1, 1, bold: true);
-            table.CellText(1, 1, "维度名称", JustificationValues.Center);
-            table.CellText(1, 5, "状态", JustificationValues.Center);
-            table.CellText(1, 6, "是否需要改善", JustificationValues.Center);
-            table.CellText(1, 7, "维度名称", JustificationValues.Center);
-            table.CellText(1, 11, "状态", JustificationValues.Center);
-            table.CellText(1, 12, "是否需要改善", JustificationValues.Center);
-            int temRowNum = 2, temColNum = 1;
-            bool isSecendCol = false;
-            foreach (var tem in DetailData)
-            {
-                again: if (!isSecendCol)
-                {
-                    int mergeRow = tem.Value.Count();
-                    table.MergeCell(temRowNum, 1, mergeRow, 1);
-                    //  table.SetCellStyle(temRowNum, 1);
-                    table.CellText(temRowNum, 1, tem.Key);
+            //// var table = doc.AddTable(3, 12);
+            ////   table.AddTableBorder(Color.Red, Color.Red);
+            //table.SetRowStyle(1, System.Drawing.Color.PaleVioletRed);
+            //table.MergeCell(1, 7, 1, 10);
+            //table.MergeCell(1, 1, 1, 4);
+            //table.SetCellStyle(1, 4, bold: true);
+            //table.SetCellStyle(1, 1, bold: true);
+            //table.CellText(1, 1, "维度名称", JustificationValues.Center);
+            //table.CellText(1, 5, "状态", JustificationValues.Center);
+            //table.CellText(1, 6, "是否需要改善", JustificationValues.Center);
+            //table.CellText(1, 7, "维度名称", JustificationValues.Center);
+            //table.CellText(1, 11, "状态", JustificationValues.Center);
+            //table.CellText(1, 12, "是否需要改善", JustificationValues.Center);
+            //int temRowNum = 2, temColNum = 1;
+            //bool isSecendCol = false;
+            //foreach (var tem in DetailData)
+            //{
+            //    again: if (!isSecendCol)
+            //    {
+            //        int mergeRow = tem.Value.Count();
+            //        table.MergeCell(temRowNum, 1, mergeRow, 1);
+            //        //  table.SetCellStyle(temRowNum, 1);
+            //        table.CellText(temRowNum, 1, tem.Key);
 
-                    foreach (var tem1 in tem.Value)
-                    {
-                        table.MergeCell(temRowNum, 2, temRowNum, 4);
-                        table.CellText(temRowNum, 2, tem1.Key);
-                        table.CellText(temRowNum, 5, tem1.Value.Item2);
-                        if (tem1.Value.Item3 == eInfluence.Bad)
-                        {
-                            table.CellText(temRowNum, 6, "😭");
-                        }
-                        temRowNum++;
-                        if (temRowNum > maxRowNum)
-                        {
-                            isSecendCol = true;
-                            temRowNum = 2;
-                            goto again;
-                        }
+            //        foreach (var tem1 in tem.Value)
+            //        {
+            //            table.MergeCell(temRowNum, 2, temRowNum, 4);
+            //            table.CellText(temRowNum, 2, tem1.Key);
+            //            table.CellText(temRowNum, 5, tem1.Value.Item2);
+            //            if (tem1.Value.Item3 == eInfluence.Bad)
+            //            {
+            //                table.CellText(temRowNum, 6, "😭");
+            //            }
+            //            temRowNum++;
+            //            if (temRowNum > maxRowNum)
+            //            {
+            //                isSecendCol = true;
+            //                temRowNum = 2;
+            //                goto again;
+            //            }
 
-                    }
-                }
-                else
-                {
-                    int mergeRow = tem.Value.Count();
-                    int tem_num = 1;
-                    table.MergeCell(temRowNum, 7, mergeRow, 7);
-                    table.SetCellStyle(temRowNum, 1);
-                    table.CellText(temRowNum, 7, tem.Key);
-                    foreach (var tem1 in tem.Value)
-                    {
-                        if (tem_num < maxRowNum)
-                        {
-                            tem_num++;
-                            continue;
-                        }
-                        table.MergeCell(temRowNum, 8, temRowNum, 10);
-                        table.CellText(temRowNum, 8, tem1.Key);
-                        table.CellText(temRowNum, 11, tem1.Value.Item2);
-                        if (tem1.Value.Item3 == eInfluence.Bad)
-                        {
-                            table.CellText(temRowNum, 12, "😭", JustificationValues.Center);
-                        }
-                        temRowNum++;
-                        if (temRowNum > maxRowNum)
-                        {
-                            // isSecendCol = true;
-                            break;
-                        }
-                    }
-                }
-            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        int mergeRow = tem.Value.Count();
+            //        int tem_num = 1;
+            //        table.MergeCell(temRowNum, 7, mergeRow, 7);
+            //        table.SetCellStyle(temRowNum, 1);
+            //        table.CellText(temRowNum, 7, tem.Key);
+            //        foreach (var tem1 in tem.Value)
+            //        {
+            //            if (tem_num < maxRowNum)
+            //            {
+            //                tem_num++;
+            //                continue;
+            //            }
+            //            table.MergeCell(temRowNum, 8, temRowNum, 10);
+            //            table.CellText(temRowNum, 8, tem1.Key);
+            //            table.CellText(temRowNum, 11, tem1.Value.Item2);
+            //            if (tem1.Value.Item3 == eInfluence.Bad)
+            //            {
+            //                table.CellText(temRowNum, 12, "😭", JustificationValues.Center);
+            //            }
+            //            temRowNum++;
+            //            if (temRowNum > maxRowNum)
+            //            {
+            //                // isSecendCol = true;
+            //                break;
+            //            }
+            //        }
+            //    }
+            //}
+#endregion
+            var detaildata1 = new SafeDictionary<string, (string, string, Word.Enum.eInfluence, double)>();
+            detaildata1.Add("test_demension", ("test1", "test2", Word.Enum.eInfluence.坏, 2.1));
+            detaildata1.Add("test_demension2", ("test1", "test2", Word.Enum.eInfluence.坏, 2.1));
+            doc.Addtable2("testtitle", "test_evaluate", detaildata1);
+            doc.AddBlankLine(1);
+            doc.Addtable3("testtitle", "test_evaluate", detaildata1);
+            doc.AddBlankLine(1);
+            doc.Addtable4("testtitle", "test_evaluate", detaildata1);
+            doc.AddBlankLine(1);
+            doc.Addtable5("testtitle", "test_evaluate", detaildata1);
             doc.Close();
+
+            Console.WriteLine();
 
 
 
@@ -188,6 +209,6 @@ namespace Test
             System.Diagnostics.Process.Start(@"C:\Users\Zhang\Documents\test_word.docx");
             Console.Read();
         }
-      
+
     }
 }
